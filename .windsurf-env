@@ -1,0 +1,30 @@
+# .windsurf-env
+# Environment variables for Windsurf IDE configuration
+
+# Operating System Configuration
+WINDSURF_OS=windows11
+WINDSURF_SHELL=powershell
+
+# Node.js Configuration
+WINDSURF_NODE_VERSION=18.17.0
+WINDSURF_PACKAGE_MANAGER=npm
+
+# Framework Configuration
+WINDSURF_FRAMEWORK=next@14.0.3
+WINDSURF_PROJECT_TYPE=next-js-pwa
+
+# TypeScript Configuration
+WINDSURF_TYPESCRIPT=true
+
+# Feature Flags
+WINDSURF_PWA_ENABLED=true
+WINDSURF_OFFLINE_SUPPORT=true
+
+# Development Configuration
+WINDSURF_FORMAT_ON_SAVE=true
+WINDSURF_USE_PRETTIER=true
+WINDSURF_USE_ESLINT=true
+
+# Project Memory
+WINDSURF_PERSISTENCE_LEVEL=high
+WINDSURF_LOAD_CONFIG_ON_START=true

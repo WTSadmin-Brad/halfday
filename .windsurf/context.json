@@ -1,0 +1,41 @@
+{
+  // .windsurf/context.json
+  // Project context configuration for maintaining consistent development environment
+  
+  "windsurf.context": {
+    // Operating system and environment
+    "operatingSystem": "windows11",
+    "packageManager": "npm",
+    "nodeVersion": "18.17.0",
+    
+    // Framework specifications
+    "framework": {
+      "name": "next",
+      "version": "14.0.3"
+    },
+    
+    // Context persistence
+    "persistentContext": true,
+    
+    // Project specifications
+    "project": {
+      "type": "next-js-pwa",
+      "offline": true,
+      "typescript": true
+    },
+    
+    // Feature flags
+    "features": {
+      "pwa": true,
+      "firebase": true,
+      "offline": true
+    },
+    
+    // Development tooling
+    "development": {
+      "prettier": true,
+      "eslint": true,
+      "tailwind": true
+    }
+  }
+}

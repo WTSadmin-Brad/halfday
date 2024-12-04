@@ -1,0 +1,53 @@
+{
+  // .windsurf/settings.json
+  // Core settings for Windsurf IDE configuration
+  
+  "editor": {
+    // Basic editor preferences
+    "defaultFormatter": "esbenp.prettier-vscode",
+    "formatOnSave": true,
+    "codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "quickSuggestions": {
+      "strings": true
+    }
+  },
+
+  "windsurf": {
+    // Command execution configuration
+    "commands": {
+      "shell": "powershell.exe",
+      "useWindowsPaths": true,
+      "forceWindowsCommands": true,
+      "preventPosixCommands": true
+    },
+
+    // Version and dependency management
+    "persistence": {
+      "versionLock": true,
+      "dependencyVersions": {
+        "enforce": true,
+        "source": "package.json"
+      }
+    },
+
+    // Context and memory settings
+    "context": {
+      "persistenceLevel": "high",
+      "projectMemory": true,
+      "loadConfigOnStart": true
+    },
+
+    // Project-specific configurations
+    "project": {
+      "type": "next-js-pwa",
+      "framework": {
+        "name": "next",
+        "version": "14.0.3"
+      },
+      "typescript": true,
+      "offline": true
+    }
+  }
+}

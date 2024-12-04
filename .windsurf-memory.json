@@ -1,0 +1,52 @@
+{
+  // .windsurf-memory.json
+  // Persistent project memory configuration for maintaining context between sessions
+  
+  "projectType": "next-js-pwa",
+  
+  // Technical stack specifications
+  "techStack": {
+    "frontend": {
+      "framework": "next@14.0.3",
+      "styling": "tailwind@3.3.5",
+      "components": "shadcn-ui@latest"
+    },
+    "backend": {
+      "service": "firebase@10.6.0"
+    }
+  },
+  
+  // Project constraints and requirements
+  "constraints": {
+    "nodeVersion": "18.17.0",
+    "typescript": true,
+    "offline": true
+  },
+  
+  // Feature configurations
+  "features": {
+    "pwa": {
+      "enabled": true,
+      "offline": true,
+      "manifestPath": "./public/manifest.json",
+      "workboxConfig": "./next.config.js"
+    },
+    "firebase": {
+      "configPath": "./src/lib/firebase/config.ts",
+      "enforceTypes": true
+    }
+  },
+  
+  // Development requirements
+  "development": {
+    "requiredExtensions": [
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "bradlc.vscode-tailwindcss"
+    ],
+    "recommendedExtensions": [
+      "github.copilot",
+      "eamodio.gitlens"
+    ]
+  }
+}

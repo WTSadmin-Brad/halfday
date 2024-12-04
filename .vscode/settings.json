@@ -1,0 +1,57 @@
+{
+  // .vscode/settings.json
+  // VSCode integration settings for Windsurf IDE
+  
+  // TypeScript Configuration
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  
+  // CSS and Tailwind Configuration
+  "css.validate": false,
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.validate": true,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  
+  // Git Integration
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "gitlens.codeLens.enabled": true,
+  
+  // Editor Configuration
+  "editor": {
+    "formatOnSave": true,
+    "defaultFormatter": "esbenp.prettier-vscode",
+    "tabSize": 2,
+    "rulers": [100],
+    "bracketPairColorization.enabled": true,
+    "codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  
+  // File Associations
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "*.tsx": "typescriptreact"
+  },
+  
+  // Search Configuration
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.next": true
+  },
+  
+  // Terminal Configuration
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    }
+  }
+}
