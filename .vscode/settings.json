@@ -53,5 +53,8 @@
       "source": "PowerShell",
       "icon": "terminal-powershell"
     }
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
   }
 }
