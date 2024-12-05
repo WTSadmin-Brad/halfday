@@ -11,6 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
+        inter: ["var(--font-inter)", "system-ui", "sans-serif"],
         sans: ["var(--font-inter)", ...fontFamily.sans],
         mono: ["var(--font-jetbrains-mono)", ...fontFamily.mono],
       },
@@ -24,6 +25,12 @@ const config: Config = {
         "3xl": ["1.875rem", { lineHeight: "2.25rem" }],
         "4xl": ["2.25rem", { lineHeight: "2.5rem" }],
         "5xl": ["3rem", { lineHeight: "1" }],
+      },
+      fontWeight: {
+        light: "300",
+        normal: "400",
+        medium: "500",
+        semibold: "600",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

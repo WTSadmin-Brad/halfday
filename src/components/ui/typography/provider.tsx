@@ -1,18 +1,18 @@
-import * as React from 'react'
-import type { TypographyContextValue } from '@/lib/typography/types'
+import * as React from "react";
+import type { TypographyContextValue } from "@/lib/typography/types";
 
-const TypographyContext = React.createContext<TypographyContextValue>({})
+const TypographyContext = React.createContext<TypographyContextValue>({});
 
 export const useTypography = () => {
-  const context = React.useContext(TypographyContext)
+  const context = React.useContext(TypographyContext);
   if (context === undefined) {
-    throw new Error('useTypography must be used within a TypographyProvider')
+    throw new Error("useTypography must be used within a TypographyProvider");
   }
-  return context
-}
+  return context;
+};
 
 interface TypographyProviderProps extends TypographyContextValue {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function TypographyProvider({
@@ -26,11 +26,11 @@ export function TypographyProvider({
       align,
     }),
     [variant, align]
-  )
+  );
 
   return (
     <TypographyContext.Provider value={value}>
       {children}
     </TypographyContext.Provider>
-  )
+  );
 }

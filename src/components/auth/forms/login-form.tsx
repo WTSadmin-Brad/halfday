@@ -47,59 +47,56 @@ export function LoginForm() {
   };
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-md">
-      <NeumorphicCard>
-        <CardHeader>
-          <h2 className="text-2xl font-semibold text-center">Welcome Back</h2>
-          <p className="text-sm text-muted-foreground text-center">
-            Enter your credentials to access your account
-          </p>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <NeumorphicInput
-            label="Email"
-            type="email"
-            placeholder="Enter your email"
-            error={form.formState.errors.email?.message}
-            {...form.register("email")}
-          />
-          <NeumorphicInput
-            label="Password"
-            type="password"
-            placeholder="Enter your password"
-            error={form.formState.errors.password?.message}
-            {...form.register("password")}
-          />
-        </CardContent>
-        <CardFooter className="flex flex-col gap-4">
-          <NeumorphicButton
-            type="submit"
-            className="w-full"
-            loading={isLoading}
-            disabled={isLoading}
-          >
-            Sign In
-          </NeumorphicButton>
-          <div className="text-sm text-center space-y-2">
-            <button
-              type="button"
-              onClick={() => router.push("/auth/forgot-password")}
-              className="text-primary hover:underline"
-            >
-              Forgot password?
-            </button>
-            <p>
-              Don&apos;t have an account?{" "}
-              <button
-                type="button"
-                onClick={() => router.push("/auth/register")}
-                className="text-primary hover:underline"
-              >
-                Sign up
-              </button>
-            </p>
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <NeumorphicCard className="p-6">
+        <CardContent className="space-y-6">
+          <div className="space-y-4">
+            <NeumorphicInput
+              id="email"
+              type="email"
+              placeholder="name@example.com"
+              {...form.register("email")}
+              error={form.formState.errors.email?.message}
+              className="bg-[#edf0f4] shadow-[inset_2px_2px_5px_rgba(174,174,192,0.2),inset_-2px_-2px_5px_rgba(255,255,255,0.7)] border-none transition-shadow duration-300"
+            />
+            <NeumorphicInput
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              {...form.register("password")}
+              error={form.formState.errors.password?.message}
+              className="bg-[#edf0f4] shadow-[inset_2px_2px_5px_rgba(174,174,192,0.2),inset_-2px_-2px_5px_rgba(255,255,255,0.7)] border-none transition-shadow duration-300"
+            />
           </div>
-        </CardFooter>
+          <div className="space-y-4">
+            <NeumorphicButton
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-[#edf0f4] text-gray-700 font-medium text-base shadow-[4px_4px_8px_rgba(174,174,192,0.2),-4px_-4px_8px_rgba(255,255,255,0.6)] hover:shadow-[2px_2px_4px_rgba(174,174,192,0.2),-2px_-2px_4px_rgba(255,255,255,0.6)] active:shadow-[inset_2px_2px_4px_rgba(174,174,192,0.2),inset_-2px_-2px_4px_rgba(255,255,255,0.6)] transition-shadow duration-300"
+            >
+              {isLoading ? "Signing in..." : "Sign in"}
+            </NeumorphicButton>
+            <div className="text-center space-y-2">
+              <button 
+                type="button"
+                className="text-sm font-normal text-gray-500 hover:text-gray-700 transition-colors"
+                onClick={() => router.push("/forgot-password")}
+              >
+                Forgot your password?
+              </button>
+              <p className="text-sm font-normal text-gray-500">
+                Don't have an account?{" "}
+                <button
+                  type="button"
+                  onClick={() => router.push("/register")}
+                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                >
+                  Sign up
+                </button>
+              </p>
+            </div>
+          </div>
+        </CardContent>
       </NeumorphicCard>
     </form>
   );

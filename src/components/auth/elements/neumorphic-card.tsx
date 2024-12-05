@@ -12,23 +12,17 @@ export interface NeumorphicCardProps
 
 const neumorphicCardVariants = cva(
   // Base styles - using our neumorphic design system
-  "relative bg-neumorphic-base transition-all duration-200",
+  "relative bg-[#edf0f4] rounded-2xl transition-all duration-300",
   {
     variants: {
       variant: {
-        default: "shadow-neumorphic-flat",
-        pressed: "shadow-neumorphic-pressed",
-        elevated: "shadow-neumorphic-flat hover:shadow-[12px_12px_24px_rgba(174,174,192,0.4),-12px_-12px_24px_rgba(255,255,255,0.7)]",
-      },
-      size: {
-        default: "p-6",
-        sm: "p-4",
-        lg: "p-8",
+        default: "shadow-[6px_6px_12px_rgba(174,174,192,0.2),-6px_-6px_12px_rgba(255,255,255,0.6)]",
+        pressed: "shadow-[inset_2px_2px_5px_rgba(174,174,192,0.2),inset_-2px_-2px_5px_rgba(255,255,255,0.7)]",
+        elevated: "shadow-[8px_8px_16px_rgba(174,174,192,0.2),-8px_-8px_16px_rgba(255,255,255,0.6)] hover:shadow-[6px_6px_12px_rgba(174,174,192,0.2),-6px_-6px_12px_rgba(255,255,255,0.6)]",
       },
     },
     defaultVariants: {
       variant: "default",
-      size: "default",
     },
   }
 );
@@ -51,12 +45,12 @@ const neumorphicCardVariants = cva(
  * ```
  */
 const NeumorphicCard = React.forwardRef<HTMLDivElement, NeumorphicCardProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : Card;
     return (
       <Comp
         ref={ref}
-        className={cn(neumorphicCardVariants({ variant, size, className }))}
+        className={cn(neumorphicCardVariants({ variant, className }))}
         {...props}
       />
     );
