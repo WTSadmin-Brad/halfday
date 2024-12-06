@@ -1,5 +1,15 @@
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib//ui/utils";
+
+const LOGO_SIZES = {
+  sm: 40, // Small: navbar, footer
+  md: 64, // Medium: small headers
+  lg: 96, // Large: main headers
+  xl: 128, // Extra large: hero sections
+  "2xl": 192, // Double extra large: splash pages
+} as const;
+
+type LogoSize = keyof typeof LOGO_SIZES | number;
 
 export interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -10,11 +20,17 @@ export interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   variant?: "circle" | "text" | "full";
   /**
-   * The size of the logo in pixels
-   * For 'circle' variant, this is the diameter
-   * For 'text' and 'full' variants, this is the height
+   * The size of the logo
+   * Can be a preset size ('sm' | 'md' | 'lg' | 'xl' | '2xl')
+   * or a custom number in pixels
+   * @default 'md'
    */
-  size?: number;
+  size?: LogoSize;
+  /**
+   * The color variant of the logo
+   * @default 'default'
+   */
+  color?: "default" | "gray";
   /**
    * Whether to show the logo in dark mode
    */
@@ -23,39 +39,31 @@ export interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Logo({
   variant = "full",
-  size = 40,
+  size = "md",
+  color = "default",
   dark = false,
   className,
   ...props
 }: LogoProps) {
-  // Calculate width for text and full variants (maintain aspect ratio)
-  const getWidth = () => {
-    switch (variant) {
-      case "circle":
-        return size;
-      case "text":
-        return size * 3.5; // Approximate aspect ratio for text
-      case "full":
-        return size * 4; // Approximate aspect ratio for full logo
-      default:
-        return size;
-    }
-  };
+  // Convert size to pixels if it's a preset
+  const sizeInPx = typeof size === "string" ? LOGO_SIZES[size] : size;
 
-  const width = getWidth();
-  const logoSrc = `/logo/${variant === "circle" ? "logo" : variant === "text" ? "logo-text" : "logo-full"}.svg`;
+  const logoSrc = `/logo/${
+    variant === "circle"
+      ? "logo"
+      : variant === "text"
+      ? "logo-text"
+      : "logo-full"
+  }${dark ? "-dark" : ""}.svg`;
 
   return (
-    <div
-      className={cn("relative inline-block", className)}
-      style={{ width, height: size }}
-      {...props}
-    >
+    <div className={cn("relative inline-block", className)} {...props}>
       <Image
         src={logoSrc}
         alt="Halfday Logo"
-        fill
-        className="object-contain"
+        width={sizeInPx}
+        height={sizeInPx}
+        className={cn("object-contain h-[inherit]")}
         priority
       />
     </div>
