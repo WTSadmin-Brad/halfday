@@ -63,7 +63,7 @@ export function Logo({
         alt="Halfday Logo"
         width={sizeInPx}
         height={sizeInPx}
-        className={cn("object-contain h-[inherit]")}
+        className={cn("object-contain h-[inherit]", className)}
         priority
       />
     </div>

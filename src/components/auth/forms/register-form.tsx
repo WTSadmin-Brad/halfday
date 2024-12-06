@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
 
-import { registerFormSchema, type RegisterFormData } from "@/lib/utils/validation";
+import { registerFormSchema, type RegisterFormData } from "@/lib/validation/schemas";
 import { signUpWithEmail } from "@/lib/firebase/auth";
 import { 
   NeumorphicCard, 

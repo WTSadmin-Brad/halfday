@@ -15,3 +15,17 @@ export interface TypographyContextValue {
   variant?: TextVariant
   align?: TextAlignment
 }
+
+export interface ThemeAwareTypography {
+  textColor: string;
+  mutedColor: string;
+  headingColor: string;
+  linkColor: string;
+  linkHoverColor: string;
+  form: {
+    inputText: string;
+    inputPlaceholder: string;
+    inputDisabled: string;
+    inputError: string;
+  };
+}

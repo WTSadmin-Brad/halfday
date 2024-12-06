@@ -388,17 +388,368 @@ export function SEOHeading({ pageTitle, ...props }: SEOHeadingProps) {
 }
 ```
 
-This system:
-- Fully integrates with Next.js 14 and Tailwind
-- Leverages shadcn/ui's design patterns
-- Uses modern CSS features
-- Implements proper font loading strategies
-- Maintains accessibility
-- Provides type safety
-- Optimizes for performance
+## Typography System
 
-Would you like me to:
-1. Add more complex component compositions?
-2. Detail the responsive typography system further?
-3. Show more integration examples with shadcn/ui?
-4. Add dark mode specific typography utilities?
+Our typography system is designed to provide consistent text styling across the application, with built-in support for dark/light themes and various UI components.
+
+### Core Components
+
+#### 1. Theme-Aware Typography
+
+The system uses `next-themes` for theme detection and provides consistent colors through the `useThemeAwareTypography` hook. This ensures all text elements adapt to the user's preferred theme.
+
+#### 2. Typography Constants
+
+We maintain a centralized set of typography constants in `src/lib/typography/hooks/use-theme-aware-typography.ts`:
+
+```typescript
+typographyThemeConstants = {
+  dark: {
+    textColor: "text-gray-50",
+    // ... other dark theme colors
+    form: {
+      inputText: "text-gray-100",
+      inputPlaceholder: "text-gray-400",
+      // ... other form colors
+    }
+  },
+  light: {
+    // Light theme equivalents
+  }
+}
+```
+
+#### 3. Typography Hook
+
+The `useThemeAwareTypography` hook provides access to theme-aware typography styles:
+
+```typescript
+const Component = () => {
+  const typography = useThemeAwareTypography();
+  return <div className={typography.textColor}>...</div>;
+};
+```
+
+## Component Integration
+
+### Base Components
+
+Base components like `Input` automatically integrate with the typography system:
+
+```typescript
+// src/components/ui/input.tsx
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, ...props }, ref) => {
+    const typography = useThemeAwareTypography();
+    return (
+      <input
+        className={cn(
+          typography.form.inputText,
+          `placeholder:${typography.form.inputPlaceholder}`,
+          // ... other styles
+        )}
+        {...props}
+      />
+    );
+  }
+);
+```
+
+### Extended Components
+
+Components that extend base components (like NeumorphicInput) inherit typography styles and can add their own:
+
+```typescript
+export function NeumorphicInput({ className, ...props }: NeumorphicInputProps) {
+  const typography = useThemeAwareTypography();
+  return (
+    <Input
+      className={cn(
+        neumorphicInputVariants(),
+        // Base styles are inherited from Input
+        className
+      )}
+      {...props}
+    />
+  );
+}
+```
+
+## Best Practices
+
+### 1. Use the Typography Hook
+
+❌ Don't hardcode colors:
+```typescript
+<div className="text-gray-900">...</div>
+```
+
+✅ Do use the typography hook:
+```typescript
+const typography = useThemeAwareTypography();
+<div className={typography.textColor}>...</div>
+```
+
+### 2. Extend Base Components
+
+❌ Don't recreate existing typography logic:
+```typescript
+<input className="text-gray-900 dark:text-gray-100" />
+```
+
+✅ Do extend base components:
+```typescript
+<Input className={customStyles} />
+```
+
+### 3. Component-Specific Typography
+
+When creating new component categories:
+
+1. Add types to `ThemeAwareTypography`
+2. Add constants to `typographyThemeConstants`
+3. Create a base component that uses these styles
+4. Document the new typography patterns
+
+## Common Patterns
+
+### Form Fields
+
+```typescript
+// Label
+<Label className={typography.form.inputText}>
+
+// Input
+<Input className={typography.form.inputText} />
+
+// Error Message
+<p className={typography.form.inputError}>
+
+// Helper Text
+<p className={typography.mutedColor}>
+```
+
+### Text Content
+
+```typescript
+// Regular Text
+<p className={typography.textColor}>
+
+// Muted Text
+<p className={typography.mutedColor}>
+
+// Links
+<a className={typography.linkColor}>
+```
+
+## Extending the System
+
+1. Identify the new typography need
+2. Add appropriate types to `ThemeAwareTypography`
+3. Add theme-specific styles to `typographyThemeConstants`
+4. Create or update components to use the new styles
+5. Document the new additions
+
+## Migration Guide
+
+When migrating existing components to use the typography system:
+
+1. Import the `useThemeAwareTypography` hook
+2. Replace hardcoded colors with typography constants
+3. Extend base components where possible
+4. Test in both light and dark modes
+5. Update component documentation
+
+## Typography System Documentation
+
+### Overview
+
+Our typography system is built on three core principles:
+1. Theme awareness (light/dark mode support)
+2. Component-specific typography
+3. Consistent, maintainable styling
+
+### Architecture
+
+#### 1. Core Types (`src/lib/typography/types.ts`)
+
+```typescript
+export interface ThemeAwareTypography {
+  // Base text styles
+  textColor: string;
+  mutedColor: string;
+  headingColor: string;
+  
+  // Interactive elements
+  linkColor: string;
+  linkHoverColor: string;
+  
+  // Form-specific typography
+  form: {
+    inputText: string;
+    inputPlaceholder: string;
+    inputDisabled: string;
+    inputError: string;
+  };
+}
+```
+
+#### 2. Theme Constants (`src/lib/typography/hooks/use-theme-aware-typography.ts`)
+
+```typescript
+export const typographyThemeConstants = {
+  dark: {
+    textColor: "text-gray-50",
+    // ... other dark theme colors
+    form: {
+      inputText: "text-gray-100",
+      inputPlaceholder: "text-gray-400",
+      // ... other form colors
+    }
+  },
+  light: {
+    // Light theme equivalents
+  }
+};
+```
+
+#### 3. Typography Hook
+
+The `useThemeAwareTypography` hook provides access to theme-aware typography styles:
+
+```typescript
+const Component = () => {
+  const typography = useThemeAwareTypography();
+  return <div className={typography.textColor}>...</div>;
+};
+```
+
+## Component Integration
+
+### Base Components
+
+Base components like `Input` automatically integrate with the typography system:
+
+```typescript
+// src/components/ui/input.tsx
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, ...props }, ref) => {
+    const typography = useThemeAwareTypography();
+    return (
+      <input
+        className={cn(
+          typography.form.inputText,
+          `placeholder:${typography.form.inputPlaceholder}`,
+          // ... other styles
+        )}
+        {...props}
+      />
+    );
+  }
+);
+```
+
+### Extended Components
+
+Components that extend base components (like NeumorphicInput) inherit typography styles and can add their own:
+
+```typescript
+export function NeumorphicInput({ className, ...props }: NeumorphicInputProps) {
+  const typography = useThemeAwareTypography();
+  return (
+    <Input
+      className={cn(
+        neumorphicInputVariants(),
+        // Base styles are inherited from Input
+        className
+      )}
+      {...props}
+    />
+  );
+}
+```
+
+## Best Practices
+
+### 1. Use the Typography Hook
+
+❌ Don't hardcode colors:
+```typescript
+<div className="text-gray-900">...</div>
+```
+
+✅ Do use the typography hook:
+```typescript
+const typography = useThemeAwareTypography();
+<div className={typography.textColor}>...</div>
+```
+
+### 2. Extend Base Components
+
+❌ Don't recreate existing typography logic:
+```typescript
+<input className="text-gray-900 dark:text-gray-100" />
+```
+
+✅ Do extend base components:
+```typescript
+<Input className={customStyles} />
+```
+
+### 3. Component-Specific Typography
+
+When creating new component categories:
+
+1. Add types to `ThemeAwareTypography`
+2. Add constants to `typographyThemeConstants`
+3. Create a base component that uses these styles
+4. Document the new typography patterns
+
+## Common Patterns
+
+### Form Fields
+
+```typescript
+// Label
+<Label className={typography.form.inputText}>
+
+// Input
+<Input className={typography.form.inputText} />
+
+// Error Message
+<p className={typography.form.inputError}>
+
+// Helper Text
+<p className={typography.mutedColor}>
+```
+
+### Text Content
+
+```typescript
+// Regular Text
+<p className={typography.textColor}>
+
+// Muted Text
+<p className={typography.mutedColor}>
+
+// Links
+<a className={typography.linkColor}>
+```
+
+## Extending the System
+
+1. Identify the new typography need
+2. Add appropriate types to `ThemeAwareTypography`
+3. Add theme-specific styles to `typographyThemeConstants`
+4. Create or update components to use the new styles
+5. Document the new additions
+
+## Migration Guide
+
+When migrating existing components to use the typography system:
+
+1. Import the `useThemeAwareTypography` hook
+2. Replace hardcoded colors with typography constants
+3. Extend base components where possible
+4. Test in both light and dark modes
+5. Update component documentation

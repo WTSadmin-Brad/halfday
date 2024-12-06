@@ -1,46 +1,40 @@
 import { useTheme } from "next-themes";
-
-interface ThemeAwareTypography {
-  textColor: string;
-  mutedColor: string;
-  headingColor: string;
-  linkColor: string;
-  linkHoverColor: string;
-}
+import type { ThemeAwareTypography } from "../types";
 
 export function useThemeAwareTypography(): ThemeAwareTypography {
   const { theme, systemTheme } = useTheme();
   const isDark =
     theme === "dark" || (theme === "system" && systemTheme === "dark");
 
-  return {
-    // Main text colors
-    textColor: isDark ? "text-gray-50" : "text-gray-900",
-    mutedColor: isDark ? "text-gray-400" : "text-gray-500",
-
-    // Heading specific color
-    headingColor: isDark ? "text-gray-50" : "text-gray-900",
-
-    // Link colors with hover states
-    linkColor: isDark ? "text-blue-400" : "text-blue-600",
-    linkHoverColor: isDark ? "hover:text-blue-300" : "hover:text-blue-700",
-  };
+  return isDark ? typographyThemeConstants.dark : typographyThemeConstants.light;
 }
 
-// Optional: Export constants for consistent usage
+// Export constants for consistent usage across the application
 export const typographyThemeConstants = {
   dark: {
-    text: "text-gray-50",
-    muted: "text-gray-400",
-    heading: "text-gray-50",
-    link: "text-blue-400",
-    linkHover: "hover:text-blue-300",
+    textColor: "text-gray-50",
+    mutedColor: "text-gray-400",
+    headingColor: "text-gray-50",
+    linkColor: "text-blue-400",
+    linkHoverColor: "hover:text-blue-300",
+    form: {
+      inputText: "text-white",
+      inputPlaceholder: "text-gray-400",
+      inputDisabled: "text-gray-600",
+      inputError: "text-red-400",
+    },
   },
   light: {
-    text: "text-gray-900",
-    muted: "text-gray-500",
-    heading: "text-gray-900",
-    link: "text-blue-600",
-    linkHover: "hover:text-blue-700",
+    textColor: "text-gray-500",
+    mutedColor: "text-gray-400",
+    headingColor: "text-gray-500",
+    linkColor: "text-blue-600",
+    linkHoverColor: "hover:text-blue-700",
+    form: {
+      inputText: "text-gray-500",
+      inputPlaceholder: "text-gray-400",
+      inputDisabled: "text-gray-300",
+      inputError: "text-red-600",
+    },
   },
 } as const;

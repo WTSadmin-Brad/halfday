@@ -2,7 +2,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/ui/utils";
 
 export interface NeumorphicButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -17,10 +17,10 @@ const neumorphicButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-neumorphic-base text-foreground shadow-neumorphic-flat hover:shadow-neumorphic-pressed active:shadow-neumorphic-pressed",
-        pressed: "bg-neumorphic-base text-foreground shadow-neumorphic-pressed",
-        ghost: "bg-transparent hover:bg-accent hover:text-accent-foreground",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-neumorphic-destructive",
+        default: "bg-anti-flash-white text-gunmetal shadow-neumorphic-flat hover:shadow-neumorphic-pressed active:shadow-neumorphic-pressed",
+        pressed: "bg-anti-flash-white text-gunmetal shadow-neumorphic-pressed",
+        ghost: "bg-transparent hover:bg-orange hover:text-white",
+        destructive: "bg-orange text-white hover:bg-orange/90 shadow-neumorphic-destructive",
       },
       size: {
         default: "h-12 px-6 py-3",

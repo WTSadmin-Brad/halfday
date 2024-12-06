@@ -43,55 +43,60 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        // Brand Colors
+        gunmetal: "#232C33",
+        sage: "#638475",
+        orange: "#FCA311",
+        "light-gray": "#D8DBE2",
+        "anti-flash-white": "#EFF1F3",
+
+        // Semantic Colors
+        background: "var(--color-background)",
+        foreground: "var(--color-foreground)",
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "var(--color-background)",
+          foreground: "var(--color-foreground)",
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "var(--color-primary)",
+          foreground: "var(--color-primary-foreground)",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "var(--color-secondary)",
+          foreground: "var(--color-secondary-foreground)",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "var(--color-muted)",
+          foreground: "var(--color-muted-foreground)",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "var(--color-accent)",
+          foreground: "var(--color-accent-foreground)",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "var(--color-destructive)",
+          foreground: "var(--color-destructive-foreground)",
         },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
+        border: "var(--color-border)",
+        input: "var(--color-input)",
+        ring: "var(--color-ring)",
+
+        // Neumorphic Colors
+        neumorphic: {
+          base: "var(--color-background)",
+          light: "#FFFFFF",
+          dark: "var(--color-muted)",
+          shadow: {
+            light: "rgba(255, 255, 255, 0.7)",
+            dark: "rgba(174, 174, 192, 0.4)",
+          },
+        },
         chart: {
           "1": "hsl(var(--chart-1))",
           "2": "hsl(var(--chart-2))",
           "3": "hsl(var(--chart-3))",
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
-        },
-        // Neumorphic specific colors
-        neumorphic: {
-          base: "#F0F0F3",
-          light: "#FFFFFF",
-          dark: "#D1D9E6",
-          shadow: {
-            light: "rgba(255, 255, 255, 0.7)",
-            dark: "rgba(174, 174, 192, 0.4)",
-          },
         },
       },
       boxShadow: {
@@ -112,20 +117,31 @@ const config: Config = {
         "neumorphic-press": {
           "0%": {
             boxShadow: `
-            8px 8px 16px rgba(174, 174, 192, 0.4),
-            -8px -8px 16px rgba(255, 255, 255, 0.7)
-          `,
+              8px 8px 16px var(--tw-shadow-color),
+              -8px -8px 16px var(--tw-inner-shadow-color)
+            `,
           },
           "100%": {
             boxShadow: `
-            inset 8px 8px 16px rgba(174, 174, 192, 0.4),
-            inset -8px -8px 16px rgba(255, 255, 255, 0.7)
-          `,
+              4px 4px 8px var(--tw-shadow-color),
+              -4px -4px 8px var(--tw-inner-shadow-color)
+            `,
+          },
+        },
+        "fade-in": {
+          "0%": { 
+            opacity: "0",
+            filter: "blur(5px)",
+          },
+          "100%": { 
+            opacity: "1",
+            filter: "blur(0px)",
           },
         },
       },
       animation: {
         "neumorphic-press": "neumorphic-press 0.2s ease-in-out forwards",
+        "fade-in": "fade-in 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards",
       },
     },
   },

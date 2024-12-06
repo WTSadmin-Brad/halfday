@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/ui/utils";
 import { ThemeProvider } from "next-themes";
 
 const inter = Inter({
@@ -43,7 +43,7 @@ export default function RootLayout({
           "font-sans antialiased"
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
           <Toaster />
         </ThemeProvider>

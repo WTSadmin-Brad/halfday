@@ -1,25 +1,29 @@
 # Half Day App Core Architecture
 
 ---
+
 type: specification
 category: architecture
 status: active
 created: 2024-11-30
 tags:
-  - spec/architecture
-  - tech/firebase
-  - tech/pwa
-  - tech/nextjs
-  - phase/implementation
-  - architecture/offline-first
-related:
-  - [[Tech Stack Decision]]
-  - [[PWA Implementation Strategy]]
-  - [[Offline Sync Architecture]]
-  - [[Firebase Configuration]]
+
+- spec/architecture
+- tech/firebase
+- tech/pwa
+- tech/nextjs
+- phase/implementation
+- architecture/offline-first
+  related:
+- [[Tech Stack Decision]]
+- [[PWA Implementation Strategy]]
+- [[Offline Sync Architecture]]
+- [[Firebase Configuration]]
+
 ---
 
 ## Overview
+
 Comprehensive architecture specification for the Half Day App, implementing a Firebase-backed Progressive Web Application (PWA) with robust offline capabilities and real-time synchronization.
 
 ## System Architecture
@@ -32,13 +36,13 @@ graph TD
         B --> D[Background Sync]
         B --> E[Push Notifications]
     end
-    
+
     subgraph "Application Layer"
         F[Next.js 14] --> G[React Components]
         F --> H[State Management]
         F --> I[PWA Features]
     end
-    
+
     subgraph "Firebase Services"
         J[Authentication] --> K[User Management]
         L[Firestore] --> M[Real-time Updates]
@@ -50,20 +54,25 @@ graph TD
 ## Core Components
 
 ### Frontend Architecture
+
 1. Progressive Web App
+   
    - Service Worker implementation
    - Offline-first design
    - Background sync capabilities
    - Push notification support
 
 2. Next.js Framework
+   
    - Server-side rendering
    - API routes
    - Static optimization
    - Dynamic imports
 
 ### Backend Services
+
 1. Firebase Infrastructure
+   
    ```typescript
    interface FirebaseServices {
      auth: FirebaseAuth;
@@ -74,6 +83,7 @@ graph TD
    ```
 
 2. Data Layer
+   
    ```typescript
    interface DataLayer {
      // Core collections
@@ -81,7 +91,7 @@ graph TD
      workDays: Collection<WorkDay>;
      locations: Collection<Location>;
      trucks: Collection<Truck>;
-     
+   
      // Supporting collections
      userSettings: Collection<UserSettings>;
      syncQueue: Collection<SyncQueueItem>;
@@ -92,6 +102,7 @@ graph TD
 ## Offline Strategy
 
 ### Local Storage
+
 ```typescript
 interface OfflineStorage {
   // Primary data store
@@ -100,7 +111,7 @@ interface OfflineStorage {
     userSettings: UserSettings;
     syncQueue: SyncQueueItem[];
   };
-  
+
   // Cache storage
   cache: {
     assets: string[];
@@ -111,7 +122,9 @@ interface OfflineStorage {
 ```
 
 ### Sync Mechanism
+
 1. Queue-Based Synchronization
+   
    ```typescript
    interface SyncQueue {
      pending: Change[];
@@ -122,6 +135,7 @@ interface OfflineStorage {
    ```
 
 2. Conflict Resolution
+   
    ```typescript
    type ConflictResolution = {
      strategy: 'server-wins' | 'client-wins' | 'manual';
@@ -132,6 +146,7 @@ interface OfflineStorage {
 ## Security Implementation
 
 ### Authentication Flow
+
 ```mermaid
 sequenceDiagram
     User->>+PWA: Login Request
@@ -143,6 +158,7 @@ sequenceDiagram
 ```
 
 ### Authorization Rules
+
 ```typescript
 interface SecurityRules {
   collections: {
@@ -161,12 +177,15 @@ interface SecurityRules {
 ## Performance Optimization
 
 ### Caching Strategy
+
 1. Static Assets
+   
    - Long-term caching
    - Versioned updates
    - Preloading critical assets
 
 2. Dynamic Data
+   
    - Smart prefetching
    - Incremental sync
    - Partial updates
@@ -174,43 +193,51 @@ interface SecurityRules {
 ## Implementation Roadmap
 
 ### Phase 1: Foundation
+
 - [x] Firebase project setup
 - [x] PWA configuration
 - [ ] Authentication implementation
 - [ ] Basic offline storage
 
 ### Phase 2: Core Features
+
 - [ ] Calendar interface
 - [ ] Work status management
 - [ ] Real-time sync
 - [ ] Admin dashboard
 
 ### Phase 3: Advanced Features
+
 - [ ] Push notifications
 - [ ] Advanced offline capabilities
 - [ ] Report generation
 - [ ] Analytics integration
 
 ## Related Resources
+
 - [[Firebase Setup Guide]]
 - [[PWA Implementation Strategy]]
 - [[Offline Sync Architecture]]
 - [[Security Configuration]]
 
 ## Notes
+
 1. Implementation Priorities
+   
    - Start with PWA architecture from day one
    - Focus on offline reliability
    - Optimize for mobile users
    - Monitor Firebase usage
 
 2. Performance Targets
+   
    - < 2s initial load
    - < 500ms offline data access
    - 100% offline functionality
    - Real-time sync when online
 
 3. Security Considerations
+   
    - Regular security audits
    - Data encryption at rest
    - Secure authentication flow
