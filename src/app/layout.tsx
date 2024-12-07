@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Outfit } from "next/font/google";
 import "./globals.css";
+import '@/styles/disable-gestures.css';
 import { Toaster } from "sonner";
 import { cn } from "@/lib/ui/utils";
 import { ThemeProvider } from "next-themes";

@@ -135,27 +135,6 @@
     }
   }
 
-  @keyframes lightBeam {
-    0% {
-      opacity: 0;
-      transform: translateY(0) scale(1);
-      filter: blur(8px);
-    }
-    5% {
-      opacity: 0.9;
-    }
-    50% {
-      opacity: 0.95;
-      transform: translateY(-50vh) scale(0.6);
-      filter: blur(5px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(-100vh) scale(0.02);
-      filter: blur(1px);
-    }
-  }
-
   .animate-orb1 {
     animation: moveOrb1 15s infinite linear; /* Reduced from 20s */
   }
@@ -183,29 +162,6 @@
   .animate-fade-up {
     opacity: 0;
     animation: fadeUpIn 0.8s ease-out forwards;
-  }
-
-  .light-orb {
-    position: fixed;
-    left: 50%;
-    bottom: -10px; /* Adjusted for smaller size */
-    width: 100px; /* Half of 200px */
-    height: 100px;
-    margin-left: -50px; /* half the new width */
-    background: radial-gradient(
-      circle,
-      rgba(255,255,255,1) 0%,
-      rgba(255,255,255,0.95) 20%,
-      rgba(255,255,255,0) 50%
-    );
-    filter: blur(8px); /* Reduced blur for smaller size */
-    pointer-events: none;
-    z-index: 5;
-  }
-
-  .animate-light-beam {
-    animation: lightBeam 1.8s cubic-bezier(0.2, 0, 0.05, 1) forwards;
-    animation-delay: 3.4s; /* Start after logo appears */
   }
 
   /* Form elements appear after container, before logo */
