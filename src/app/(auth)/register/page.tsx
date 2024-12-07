@@ -1,4 +1,4 @@
-import { RegisterForm } from "@/components/auth/forms/register-form";
+import { RegisterForm } from "@/components/_backup/register-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

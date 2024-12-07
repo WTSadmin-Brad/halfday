@@ -34,8 +34,8 @@ const config: Config = {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "aurora": "url('/images/background.webp')",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -43,108 +43,40 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
-        // Brand Colors
-        gunmetal: "#232C33",
-        sage: "#638475",
-        orange: "#FCA311",
-        "light-gray": "#D8DBE2",
-        "anti-flash-white": "#EFF1F3",
-
+        border: "hsl(var(--color-border))",
+        input: "hsl(var(--color-input))",
+        // Aurora Theme Colors
+        "night-blue": "#020212",  // Updated from #03072F
+        "aurora-pink": "#F9C8CA",
+        "royal-blue": "#2D3BAC",
+        "periwinkle": "#95A4DE",
+        "crystal-white": "#FFFCF7",
         // Semantic Colors
-        background: "var(--color-background)",
-        foreground: "var(--color-foreground)",
-        card: {
-          DEFAULT: "var(--color-background)",
-          foreground: "var(--color-foreground)",
-        },
-        primary: {
-          DEFAULT: "var(--color-primary)",
-          foreground: "var(--color-primary-foreground)",
-        },
-        secondary: {
-          DEFAULT: "var(--color-secondary)",
-          foreground: "var(--color-secondary-foreground)",
-        },
-        muted: {
-          DEFAULT: "var(--color-muted)",
-          foreground: "var(--color-muted-foreground)",
-        },
-        accent: {
-          DEFAULT: "var(--color-accent)",
-          foreground: "var(--color-accent-foreground)",
-        },
-        destructive: {
-          DEFAULT: "var(--color-destructive)",
-          foreground: "var(--color-destructive-foreground)",
-        },
-        border: "var(--color-border)",
-        input: "var(--color-input)",
-        ring: "var(--color-ring)",
-
-        // Neumorphic Colors
-        neumorphic: {
-          base: "var(--color-background)",
-          light: "#FFFFFF",
-          dark: "var(--color-muted)",
-          shadow: {
-            light: "rgba(255, 255, 255, 0.7)",
-            dark: "rgba(174, 174, 192, 0.4)",
-          },
-        },
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        // Glass Effects
+        glass: {
+          background: "var(--glass-background)",
+          border: "rgba(255, 255, 255, 0.1)",
+          hover: "var(--glass-hover)",
+          DEFAULT: "rgba(255, 255, 255, 0.2)",
+          foreground: "rgba(255, 255, 255, 0.9)",
+          ring: "rgba(255, 255, 255, 0.2)",
         },
       },
-      boxShadow: {
-        "neumorphic-flat": `
-          8px 8px 16px rgba(174, 174, 192, 0.4),
-          -8px -8px 16px rgba(255, 255, 255, 0.7)
-        `,
-        "neumorphic-pressed": `
-          inset 8px 8px 16px rgba(174, 174, 192, 0.4),
-          inset -8px -8px 16px rgba(255, 255, 255, 0.7)
-        `,
-        "neumorphic-input": `
-          inset 2px 2px 5px rgba(174, 174, 192, 0.4),
-          inset -2px -2px 5px rgba(255, 255, 255, 0.7)
-        `,
+      backdropBlur: {
+        glass: "16px",
       },
-      keyframes: {
-        "neumorphic-press": {
-          "0%": {
-            boxShadow: `
-              8px 8px 16px var(--tw-shadow-color),
-              -8px -8px 16px var(--tw-inner-shadow-color)
-            `,
-          },
-          "100%": {
-            boxShadow: `
-              4px 4px 8px var(--tw-shadow-color),
-              -4px -4px 8px var(--tw-inner-shadow-color)
-            `,
-          },
-        },
-        "fade-in": {
-          "0%": { 
-            opacity: "0",
-            filter: "blur(5px)",
-          },
-          "100%": { 
-            opacity: "1",
-            filter: "blur(0px)",
-          },
-        },
+      // Glass morphism utilities
+      backgroundColor: {
+        'glass': 'rgba(255, 252, 247, 0.1)',
       },
-      animation: {
-        "neumorphic-press": "neumorphic-press 0.2s ease-in-out forwards",
-        "fade-in": "fade-in 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+      borderColor: {
+        'glass': 'rgba(255, 252, 247, 0.2)',
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [],
 };
+
 export default config;

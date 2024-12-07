@@ -1,117 +1,108 @@
-"use client";
+'use client'
 
 import * as React from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Mail, Lock, ArrowRight } from "lucide-react";
+import { GlassContainer } from "../../ui/glass/container";
+import { GlassInput } from "../../ui/glass/input";
+import { GlassButton } from "../../ui/glass/button";
+import { AnimateIn } from "../../_backup/AnimateIn";
+import { signInWithEmail } from "@/lib/firebase/auth";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Image from "next/image";
 
-import { loginFormSchema, type LoginFormData } from "@/lib/validation/schemas";
-import { signInWithEmail } from "@/lib/firebase/auth";
-import {
-  NeumorphicCard,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from "@/components/auth/elements/neumorphic-card";
-import { NeumorphicInput } from "@/components/auth/elements/neumorphic-input";
-import { NeumorphicButton } from "@/components/auth/elements/neumorphic-button";
-import { Logo } from "@/components/ui/logo";
+interface LoginFormProps {
+  isLoading?: boolean;
+}
 
-export function LoginForm() {
+export function LoginForm({ isLoading: initialLoading = false }: LoginFormProps) {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(initialLoading);
   const router = useRouter();
-  const [isLoading, setIsLoading] = React.useState(false);
 
-  const form = useForm<LoginFormData>({
-    resolver: zodResolver(loginFormSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-
-  const onSubmit = async (data: LoginFormData) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
     try {
-      setIsLoading(true);
-      await signInWithEmail(data.email, data.password);
-      toast.success("Successfully logged in!");
-      router.push("/dashboard"); // Redirect to dashboard after login
+      await signInWithEmail(email, password);
+      router.push("/dashboard"); // Redirect to dashboard after successful login
     } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error("Failed to log in. Please try again.");
-      }
+      toast.error(error instanceof Error ? error.message : "Failed to sign in");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-      <NeumorphicCard className="p-6">
-        <CardContent className="space-y-8">
-          <div className="text-center relative">
-            <div className="[filter:brightness(0)_contrast(0)_invert(45%)_sepia(5%)_saturate(100%)_hue-rotate(180deg)_brightness(95%)_contrast(90%)] [filter:drop-shadow(1px_1px_1px_rgba(255,255,255,0.5))_drop-shadow(-1px_-1px_1px_rgba(0,0,0,0.2))_drop-shadow(0_0_15px_rgba(239,241,243,0.5))]">
-              <Logo 
-                variant="full" 
-                size="2xl" 
-                className="mx-auto select-none opacity-0 animate-fade-in" 
-              />
-            </div>
-          </div>
-          <div className="space-y-4">
-            <NeumorphicInput
-              id="email"
-              type="email"
-              placeholder="name@example.com"
-              {...form.register("email")}
-              error={form.formState.errors.email?.message}
-              className="bg-[#edf0f4] shadow-[inset_2px_2px_5px_rgba(174,174,192,0.2),inset_-2px_-2px_5px_rgba(255,255,255,0.7)] border-none transition-shadow duration-300"
-            />
-            <NeumorphicInput
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              {...form.register("password")}
-              error={form.formState.errors.password?.message}
-              className="bg-[#edf0f4] shadow-[inset_2px_2px_5px_rgba(174,174,192,0.2),inset_-2px_-2px_5px_rgba(255,255,255,0.7)] border-none transition-shadow duration-300"
-            />
-          </div>
-          <div className="space-y-4">
-            <NeumorphicButton
-              type="submit"
-              disabled={isLoading}
-              className="group w-full"
-            >
-              <span className="text-lg font-bold text-[#71767b] [text-shadow:_1px_1px_1px_rgba(255,255,255,0.5),_-1px_-1px_1px_rgba(0,0,0,0.2),_0_0_15px_rgba(239,241,243,0.5)] select-none">
-                {isLoading ? "Signing in..." : "Sign in"}
-              </span>
-            </NeumorphicButton>
-            <div className="text-center space-y-2">
-              <button
-                type="button"
-                className="text-sm font-normal text-gunmetal hover:bg-gradient-to-b hover:from-orange hover:to-[#e8950f] hover:bg-clip-text hover:text-transparent transition-colors"
-                onClick={() => router.push("/forgot-password")}
-              >
-                Forgot your password?
-              </button>
-              <div className="flex items-center justify-center gap-1">
-                <span className="text-sm text-gunmetal">
-                  Don't have an account?
-                </span>
-                <button
-                  type="button"
-                  onClick={() => router.push("/register")}
-                  className="font-medium text-[#71767b] [text-shadow:_1px_1px_1px_rgba(255,255,255,0.5),_-1px_-1px_1px_rgba(0,0,0,0.2)] select-none"
-                >
-                  Sign up
-                </button>
+    <AnimateIn>
+      <div className="w-full max-w-md mx-auto px-4">
+        <GlassContainer variant="solid" className="backdrop-blur-2xl" size="lg">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Logo */}
+            <div className="flex justify-center items-center py-4">
+              <div className="relative group">
+                <Image
+                  src="/logo/logo-pink.svg"
+                  alt="Halfday Logo"
+                  width={180}
+                  height={48}
+                  className="relative
+                    [filter:drop-shadow(0_2px_2px_rgba(0,0,0,0.3))_drop-shadow(0_-1px_1px_rgba(255,255,255,0.4))]
+                    transition-all duration-500"
+                  priority
+                />
               </div>
             </div>
-          </div>
-        </CardContent>
-      </NeumorphicCard>
-    </form>
+
+            {/* Input Fields */}
+            <div className="space-y-6">
+              <GlassInput
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                variant="minimal"
+                withGradient
+                icon={<Mail className="w-5 h-5" />}
+                required
+              />
+
+              <GlassInput
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                variant="minimal"
+                withGradient
+                icon={<Lock className="w-5 h-5" />}
+                required
+              />
+            </div>
+
+            {/* Actions */}
+            <div className="space-y-4">
+              <GlassButton
+                type="submit"
+                variant="gradient"
+                withGlow
+                className="w-full"
+                disabled={isLoading}
+                icon={<ArrowRight className="w-5 h-5" />}
+              >
+                Sign In
+              </GlassButton>
+
+              <div className="text-center">
+                <GlassButton variant="link" type="button">
+                  Forgot your password?
+                </GlassButton>
+              </div>
+            </div>
+          </form>
+        </GlassContainer>
+      </div>
+    </AnimateIn>
   );
 }

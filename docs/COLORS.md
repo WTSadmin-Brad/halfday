@@ -1,46 +1,48 @@
-# Halfday Color System
+# Halfday Color System - Aurora Theme
 
 ## Brand Colors
 
-Our color palette is designed to create a professional, modern, and accessible interface that reflects our brand values.
+Our new color palette is inspired by the aurora borealis, featuring deep night blues, soft pinks, and ethereal periwinkles that create a stunning, modern interface.
 
 ### Primary Colors
 
 | Color Name     | Hex Code | RGB           | HSL                 | Usage                                        |
 |---------------|----------|---------------|---------------------|----------------------------------------------|
-| Gunmetal      | #232C33  | rgb(35,44,51) | hsl(206,19%,17%)   | Primary text, headings, logo                 |
-| Sage Green    | #638475  | rgb(99,132,117)| hsl(153,14%,45%)   | Accent elements, success states              |
-| Orange Web    | #FCA311  | rgb(252,163,17)| hsl(37,97%,53%)    | Call-to-action buttons, important highlights |
-
-### Neutral Colors
-
-| Color Name     | Hex Code | RGB           | HSL                 | Usage                                        |
-|---------------|----------|---------------|---------------------|----------------------------------------------|
-| Light Gray    | #D8DBE2  | rgb(216,219,226)| hsl(225,13%,87%)  | Input placeholders, disabled states          |
-| Anti-flash White| #EFF1F3 | rgb(239,241,243)| hsl(220,13%,95%)  | Background, neumorphic surfaces             |
+| Night Blue    | #020212  | rgb(2,2,18)   | hsl(240,80%,4%)    | Primary background, dark elements            |
+| Aurora Pink   | #F9C8CA  | rgb(249,200,202)| hsl(357,82%,88%)  | Accent elements, highlights                  |
+| Royal Blue    | #2D3BAC  | rgb(45,59,172)| hsl(234,59%,43%)   | Primary interactive elements                 |
+| Periwinkle    | #95A4DE  | rgb(149,164,222)| hsl(228,52%,73%)  | Secondary elements, subtle accents           |
+| Crystal White | #FFFCF7  | rgb(255,252,247)| hsl(40,100%,98%)  | Text, glass card backgrounds                |
 
 ## Semantic Usage
 
 ### Text Colors
-- **Headers & Body**: Gunmetal (#232C33)
-- **Placeholder Text**: Light Gray (#D8DBE2)
-- **Links**: Orange Web (#FCA311)
-- **Error Text**: Orange Web (#FCA311)
+- **Headers & Body**: Crystal White (#FFFCF7) on glass cards
+- **Placeholder Text**: Periwinkle (#95A4DE)
+- **Links**: Aurora Pink (#F9C8CA)
+- **Error Text**: Aurora Pink (#F9C8CA)
 
 ### Interactive Elements
-- **Primary Buttons**: Anti-flash White (#EFF1F3) with neumorphic styling
-- **Secondary Buttons**: Anti-flash White (#EFF1F3) with neumorphic styling
-- **Disabled States**: Light Gray (#D8DBE2)
+- **Primary Buttons**: Royal Blue (#2D3BAC) with glass morphism
+- **Secondary Buttons**: Periwinkle (#95A4DE) with glass morphism
+- **Disabled States**: Night Blue (#020212) with reduced opacity
 
 ### Backgrounds
-- **Main Background**: Anti-flash White (#EFF1F3)
-- **Card Background**: Anti-flash White (#EFF1F3)
-- **Neumorphic Elements**: Anti-flash White (#EFF1F3) with shadow manipulation
+- **Main Background**: Night Blue (#020212) with aurora effect
+- **Card Background**: Crystal White (#FFFCF7) with glass morphism
+- **Glass Elements**: Crystal White with varying opacity and blur
+
+## Glass Morphism
+
+Our glass morphism implementation uses these values:
+- Background: rgba(255, 252, 247, 0.1)
+- Backdrop Filter: blur(16px)
+- Border: 1px solid rgba(255, 252, 247, 0.2)
 
 ## Accessibility
 
-All color combinations in our system meet WCAG 2.1 Level AA standards for contrast ratios:
-- Normal text (4.5:1)
+All color combinations meet WCAG 2.1 Level AA standards:
+- Normal text on glass cards (4.5:1)
 - Large text (3:1)
 - Interactive elements (3:1)
 
@@ -50,48 +52,51 @@ All color combinations in our system meet WCAG 2.1 Level AA standards for contra
 ```css
 :root {
   /* Primary Colors */
-  --color-gunmetal: 206 19% 17%;
-  --color-sage: 153 14% 45%;
-  --color-orange: 37 97% 53%;
-  
-  /* Neutral Colors */
-  --color-light-gray: 225 13% 87%;
-  --color-white: 220 13% 95%;
+  --color-night-blue: 240 80% 4%;
+  --color-aurora-pink: 357 82% 88%;
+  --color-royal-blue: 234 59% 43%;
+  --color-periwinkle: 228 52% 73%;
+  --color-crystal-white: 40 100% 98%;
   
   /* Semantic Colors */
-  --color-text: var(--color-gunmetal);
-  --color-text-muted: var(--color-light-gray);
-  --color-primary: var(--color-orange);
-  --color-secondary: var(--color-sage);
-  --color-background: var(--color-white);
+  --color-text: var(--color-crystal-white);
+  --color-text-muted: var(--color-periwinkle);
+  --color-primary: var(--color-royal-blue);
+  --color-secondary: var(--color-aurora-pink);
+  --color-background: var(--color-night-blue);
 }
 ```
 
 ### Tailwind Classes
 ```typescript
 // Example usage in Tailwind classes
-text-gunmetal
-bg-orange
-text-sage
-bg-light-gray
-bg-white
+text-crystal-white
+bg-aurora-pink
+text-royal-blue
+bg-periwinkle
+bg-night-blue
 ```
 
-## Dark Mode Considerations
+## Aurora Effect Colors
 
-Dark mode color mappings will be defined in a future update. The current focus is on establishing and implementing the light theme.
+The aurora background effect uses combinations of:
+- Night Blue (#020212) as the base
+- Royal Blue (#2D3BAC) for depth
+- Aurora Pink (#F9C8CA) for ethereal highlights
+- Periwinkle (#95A4DE) for subtle variations
 
 ## Notes
 
-1. **Neumorphic Design**: Our neumorphic elements use the Anti-flash White (#EFF1F3) as a base color, with shadows created using light and dark variations of this color.
+1. **Glass Morphism**: Our glass elements use Crystal White as a base color with careful opacity and blur settings to maintain readability while creating depth.
 
-2. **Gradients**: When gradients are needed, they should be created using variations of our primary colors, maintaining the same hue but adjusting saturation and lightness.
+2. **Gradients**: Aurora effects use carefully orchestrated gradients of our primary colors with varying opacity levels.
 
-3. **Future Considerations**: 
-   - Define dark mode color palette
-   - Add success/warning/error state colors
-   - Consider adding tertiary colors for data visualization
+3. **Animation Considerations**: 
+   - Aurora animations should be subtle and smooth
+   - Color transitions should be gentle
+   - Reduced motion alternatives available
 
 ## Version History
 
-- v1.0.0 (Current) - Initial color system implementation
+- v2.0.0 (Current) - Aurora theme implementation
+- v1.0.0 (Deprecated) - Initial neumorphic color system

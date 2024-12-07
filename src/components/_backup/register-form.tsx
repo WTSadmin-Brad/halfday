@@ -7,16 +7,19 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
 
-import { registerFormSchema, type RegisterFormData } from "@/lib/validation/schemas";
+import {
+  registerFormSchema,
+  type RegisterFormData,
+} from "@/lib/validation/schemas";
 import { signUpWithEmail } from "@/lib/firebase/auth";
-import { 
-  NeumorphicCard, 
-  CardHeader, 
+import {
+  NeumorphicCard,
+  CardHeader,
   CardContent,
-  CardFooter 
-} from "@/components/auth/elements/neumorphic-card";
-import { NeumorphicInput } from "@/components/auth/elements/neumorphic-input";
-import { NeumorphicButton } from "@/components/auth/elements/neumorphic-button";
+  CardFooter,
+} from "@/components/_backup/neumorphic-card";
+import { NeumorphicInput } from "@/components/_backup/neumorphic-input";
+import { NeumorphicButton } from "@/components/_backup/neumorphic-button";
 
 export function RegisterForm() {
   const router = useRouter();
@@ -37,7 +40,11 @@ export function RegisterForm() {
     setIsLoading(true);
 
     try {
-      await signUpWithEmail(data.email, data.password, `${data.firstName} ${data.lastName}`);
+      await signUpWithEmail(
+        data.email,
+        data.password,
+        `${data.firstName} ${data.lastName}`
+      );
       toast.success("Account created successfully!");
       router.push("/login");
     } catch (error) {

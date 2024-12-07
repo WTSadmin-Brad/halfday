@@ -31,7 +31,6 @@ The aurora effect is now built with multiple layers that work together:
 The stars remain the same because they work so well with this effect - they float gently upward, adding movement without competing with the aurora.
 
 
-
 I'll break down each section of the aurora background effect in detail, explaining both the code and the thinking behind each part.
 
 First, let's understand the base structure:
@@ -111,7 +110,166 @@ Now, let's examine each layer in detail:
 
 {/* The blur effect that softens everything */}
 
+```typescript
+// Background image container
+<div 
+  className="absolute inset-x-0 bottom-0 w-full"
+  style={{
+    height: '60vh',  // Adjust based on image crop
+    backgroundImage: 'url("/images/aurora-bg.webp")',
+    backgroundPosition: 'center bottom',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain'
+  }}
+/>
+
+// Glass morphism container for content
+<div className="relative z-10 min-h-screen">
+  <div className="container mx-auto">
+    <div className="bg-crystal-white/10 backdrop-blur-xl border border-crystal-white/20 rounded-xl">
+      {/* Content goes here */}
+    </div>
+  </div>
+</div>
 ```
+
+# Aurora Background Implementation
+
+## Background Structure
+
+The background consists of two main elements:
+
+1. **Base Background**
+   - Solid Night Blue (#03072F) that fills the entire viewport
+   - Ensures no empty spaces on any screen size
+
+2. **Aurora Image**
+   - Positioned at the bottom center
+   - Cropped to focus on the most visually appealing bottom portion
+   - Seamlessly blends with the Night Blue background
+
+## Implementation
+
+### 1. Container Setup
+```typescript
+const AuroraBackground: React.FC = () => {
+  return (
+    <div className="relative min-h-screen bg-night-blue overflow-hidden">
+      {/* Background elements go here */}
+    </div>
+  );
+};
+```
+
+### 2. Image Implementation
+```typescript
+// Background image container
+<div 
+  className="absolute inset-x-0 bottom-0 w-full"
+  style={{
+    height: '60vh',  // Adjust based on image crop
+    backgroundImage: 'url("/images/aurora-bg.webp")',
+    backgroundPosition: 'center bottom',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain'
+  }}
+/>
+```
+
+### 3. Glass Effect Overlay
+```typescript
+// Glass morphism container for content
+<div className="relative z-10 min-h-screen">
+  <div className="container mx-auto">
+    <div className="bg-crystal-white/10 backdrop-blur-xl border border-crystal-white/20 rounded-xl">
+      {/* Content goes here */}
+    </div>
+  </div>
+</div>
+```
+
+## Image Optimization Guidelines
+
+1. **Image Processing**:
+   - Crop top portion of original image
+   - Convert to WebP format
+   - Maintain aspect ratio while reducing height
+   - Target file size: < 100KB
+
+2. **Multiple Sizes**:
+   ```typescript
+   // Responsive image loading
+   <picture>
+     <source 
+       media="(min-width: 1024px)" 
+       srcSet="/images/aurora-bg-large.webp"
+     />
+     <source 
+       media="(min-width: 640px)" 
+       srcSet="/images/aurora-bg-medium.webp"
+     />
+     <img 
+       src="/images/aurora-bg-small.webp" 
+       alt=""
+       className="w-full h-auto"
+     />
+   </picture>
+   ```
+
+## Responsive Behavior
+
+### Desktop
+- Image height: 60vh
+- Background size: contain
+- Maintains aspect ratio
+
+### Tablet
+- Image height: 50vh
+- Slight scale adjustment for medium screens
+
+### Mobile
+- Image height: 40vh
+- Optimized for vertical viewing
+
+## Performance Considerations
+
+1. **Loading Strategy**:
+   - Preload the background image
+   - Use progressive loading
+   - Implement blur-up technique
+
+2. **CSS Optimization**:
+   ```css
+   /* Prevent layout shift */
+   .aurora-background {
+     aspect-ratio: 390 / 844;  /* iPhone aspect ratio */
+     max-height: 60vh;
+   }
+   ```
+
+3. **Animation Integration**:
+   - Subtle opacity animation on load
+   - Smooth transition between breakpoints
+   - Reduced motion support
+
+## Implementation Steps
+
+1. **Image Preparation**:
+   - [ ] Crop original image
+   - [ ] Convert to WebP
+   - [ ] Create responsive sizes
+   - [ ] Optimize file size
+
+2. **Component Creation**:
+   - [ ] Create AuroraBackground component
+   - [ ] Implement responsive container
+   - [ ] Add glass morphism effects
+
+3. **Testing**:
+   - [ ] Test on various screen sizes
+   - [ ] Verify performance metrics
+   - [ ] Check for layout shifts
+
 4. The Floating Stars Effect
 
   ```typescript
@@ -133,6 +291,7 @@ Now, let's examine each layer in detail:
       scale: [1, 1.2, 1]         // Subtle twinkling effect
     }}
     transition={{
+
       duration: Math.random() * 3 + 2,  // Random duration between 2-5 seconds
       repeat: Infinity,
       delay: Math.random() * 5,         // Random start time

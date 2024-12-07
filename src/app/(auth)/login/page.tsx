@@ -1,4 +1,5 @@
 import { LoginForm } from "@/components/auth/forms/login-form";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-4 bg-anti-flash-white">
-      <div className="w-full max-w-md">
+    <AuroraBackground>
+      <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <LoginForm />
       </div>
-    </main>
+    </AuroraBackground>
   );
 }
