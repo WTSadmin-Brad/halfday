@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants, Target, VariantLabels } from "framer-motion";
@@ -31,10 +31,10 @@ export const AnimateIn = ({
   className,
   animate = true,
   isPresent = true,
-  variant = 'fade',
+  variant = "fade",
   transition,
   onAnimationStart,
-  onAnimationComplete
+  onAnimationComplete,
 }: AnimateInProps) => {
   return (
     <AnimatePresence mode="wait">

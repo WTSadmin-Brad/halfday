@@ -8,7 +8,7 @@ export interface InputProps
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, disabled, ...props }, ref) => {
     const typography = useThemeAwareTypography();
-    
+
     return (
       <input
         type={type}
@@ -18,7 +18,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           `placeholder:${typography.form.inputPlaceholder}`,
           "file:border-0 file:bg-transparent file:text-sm file:font-medium",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          disabled && [typography.form.inputDisabled, "cursor-not-allowed opacity-50"],
+          disabled && [
+            typography.form.inputDisabled,
+            "cursor-not-allowed opacity-50",
+          ],
           className
         )}
         disabled={disabled}

@@ -11,7 +11,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        inter: ["var(--font-inter)", "system-ui", "sans-serif"],
+        inter: ["var(--font-inter)", ...fontFamily.sans],
+        outfit: ["var(--font-outfit)", ...fontFamily.sans],
         sans: ["var(--font-inter)", ...fontFamily.sans],
         mono: ["var(--font-jetbrains-mono)", ...fontFamily.mono],
       },
@@ -34,8 +35,9 @@ const config: Config = {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "aurora": "url('/images/background.webp')",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        aurora: "url('/images/background.webp')",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -44,13 +46,14 @@ const config: Config = {
       },
       colors: {
         border: "hsl(var(--color-border))",
-        input: "hsl(var(--color-input))",
+        input: "hsl(var(--input))",
         // Aurora Theme Colors
-        "night-blue": "#020212",  // Updated from #03072F
+        "night-blue": "#020212", // Updated from #03072F
         "aurora-pink": "#F9C8CA",
         "royal-blue": "#2D3BAC",
-        "periwinkle": "#95A4DE",
+        periwinkle: "#95A4DE",
         "crystal-white": "#FFFCF7",
+        "crystal-lavender": "#E8C1FF", // New color for interactive elements
         // Semantic Colors
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -69,10 +72,10 @@ const config: Config = {
       },
       // Glass morphism utilities
       backgroundColor: {
-        'glass': 'rgba(255, 252, 247, 0.1)',
+        glass: "rgba(255, 252, 247, 0.1)",
       },
       borderColor: {
-        'glass': 'rgba(255, 252, 247, 0.2)',
+        glass: "rgba(255, 252, 247, 0.2)",
       },
     },
   },

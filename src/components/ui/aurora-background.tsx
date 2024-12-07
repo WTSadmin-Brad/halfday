@@ -3,6 +3,7 @@
 import React from 'react';
 import { cn } from '@/lib/ui/utils';
 import { StarField } from './star-field';
+import Image from 'next/image';
 
 interface AuroraBackgroundProps {
   className?: string;
@@ -18,22 +19,14 @@ export const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
       'relative min-h-screen bg-[#020212] overflow-hidden',
       className
     )}>
-      {/* Mobile Background Image */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 w-full bg-no-repeat bg-bottom min-h-[800px] md:hidden"
-        style={{
-          backgroundImage: 'url("/images/background.webp")',
-          height: '100vh',
-          backgroundSize: 'cover',
-        }}
-      />
-      {/* Desktop Background Image */}
-      <div 
-        className="hidden md:block absolute bottom-0 left-0 right-0 w-full bg-no-repeat bg-bottom h-[60vh]"
-        style={{
-          backgroundImage: 'url("/images/background.webp")',
-          backgroundSize: 'contain',
-        }}
+      {/* Background Image */}
+      <Image
+        src="/images/background.webp"
+        alt="Aurora Background"
+        fill
+        priority
+        className="object-cover md:object-contain md:top-auto"
+        sizes="100vw"
       />
 
       {/* Stars on top of background */}

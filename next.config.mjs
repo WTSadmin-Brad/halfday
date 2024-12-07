@@ -2,8 +2,11 @@
 const nextConfig = {
   optimizeFonts: true,
   experimental: {
-    optimizePackageImports: ['@/components/ui'],
+    optimizePackageImports: ["@/components/ui"],
   },
-}
+  async rewrites() {
+    return [];
+  },
+};
 
-export default nextConfig
+export default nextConfig;

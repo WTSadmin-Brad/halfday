@@ -1,28 +1,33 @@
 # Data Models Specification
 
 ---
+
 type: specification
 category: data-models
 status: finalized
 created: 2024-11-30
 tags:
-  - spec/data
-  - tech/firebase
-  - tech/typescript
-  - feature/offline-sync
-  - phase/implementation
-related:
-  - [[Tech Stack Decision]]
-  - [[Offline Sync Architecture]]
-  - [[Firebase Schema Design]]
+
+- spec/data
+- tech/firebase
+- tech/typescript
+- feature/offline-sync
+- phase/implementation
+  related:
+- [[Tech Stack Decision]]
+- [[Offline Sync Architecture]]
+- [[Firebase Schema Design]]
+
 ---
 
 ## Overview
+
 Finalized data model specifications for the Half Day App, optimized for Firebase/Firestore implementation with offline-first PWA architecture.
 
 ## Core Data Models
 
 ### User Model
+
 ```typescript
 interface User {
   id: string;
@@ -36,9 +41,9 @@ interface User {
 }
 
 enum UserRole {
-  WORKER = 'WORKER',
-  ADMIN = 'ADMIN',
-  MANAGER = 'MANAGER'
+  WORKER = "WORKER",
+  ADMIN = "ADMIN",
+  MANAGER = "MANAGER",
 }
 
 interface UserSettings {
@@ -46,7 +51,7 @@ interface UserSettings {
   defaultLocation?: string;
   defaultTruck?: string;
   notifications: boolean;
-  theme: 'light' | 'dark' | 'system';
+  theme: "light" | "dark" | "system";
   offlineDaysToKeep: number;
 }
 
@@ -60,9 +65,10 @@ interface UserProfile {
 ```
 
 ### WorkDay Model
+
 ```typescript
 interface WorkDay {
-  id: string;              // Compound ID: {userId}_{dateString}
+  id: string; // Compound ID: {userId}_{dateString}
   userId: string;
   date: FirebaseTimestamp;
   status: WorkStatus;
@@ -73,34 +79,35 @@ interface WorkDay {
   modifiedBy: string;
   syncStatus: SyncStatus;
   locked: boolean;
-  version: number;         // For conflict resolution
+  version: number; // For conflict resolution
 }
 
 enum WorkStatus {
-  FULL = 'FULL',
-  HALF = 'HALF',
-  OFF = 'OFF'
+  FULL = "FULL",
+  HALF = "HALF",
+  OFF = "OFF",
 }
 
 enum SyncStatus {
-  PENDING = 'PENDING',
-  SYNCED = 'SYNCED',
-  CONFLICT = 'CONFLICT'
+  PENDING = "PENDING",
+  SYNCED = "SYNCED",
+  CONFLICT = "CONFLICT",
 }
 ```
 
 ### Sync Management Models
+
 ```typescript
 interface SyncQueue {
   id: string;
   userId: string;
-  operation: 'CREATE' | 'UPDATE' | 'DELETE';
-  entityType: 'WORKDAY' | 'SETTINGS';
+  operation: "CREATE" | "UPDATE" | "DELETE";
+  entityType: "WORKDAY" | "SETTINGS";
   entityId: string;
   data: any;
   timestamp: FirebaseTimestamp;
   attempts: number;
-  status: 'PENDING' | 'PROCESSING' | 'FAILED';
+  status: "PENDING" | "PROCESSING" | "FAILED";
 }
 
 interface OfflineMetadata {
@@ -113,6 +120,7 @@ interface OfflineMetadata {
 ```
 
 ### Supporting Models
+
 ```typescript
 interface PayPeriod {
   id: string;
@@ -125,9 +133,9 @@ interface PayPeriod {
 }
 
 enum PayPeriodStatus {
-  OPEN = 'OPEN',
-  LOCKED = 'LOCKED',
-  PROCESSED = 'PROCESSED'
+  OPEN = "OPEN",
+  LOCKED = "LOCKED",
+  PROCESSED = "PROCESSED",
 }
 
 interface Location {
@@ -148,7 +156,7 @@ interface AuditLog {
   id: string;
   userId: string;
   action: string;
-  entityType: 'WORKDAY' | 'USER' | 'PAYPERIOD';
+  entityType: "WORKDAY" | "USER" | "PAYPERIOD";
   entityId: string;
   changes: Record<string, any>;
   timestamp: FirebaseTimestamp;
@@ -173,43 +181,47 @@ erDiagram
 ## Implementation Details
 
 ### Collection Structure
+
 ```typescript
 interface FirestoreCollections {
-  'users': Collection<User>;
-  'users/{userId}/settings': Collection<UserSettings>;
-  'users/{userId}/profile': Collection<UserProfile>;
-  'workDays': Collection<WorkDay>;
-  'syncQueue': Collection<SyncQueue>;
-  'offlineMetadata': Collection<OfflineMetadata>;
-  'payPeriods': Collection<PayPeriod>;
-  'locations': Collection<Location>;
-  'trucks': Collection<Truck>;
-  'auditLog': Collection<AuditLog>;
+  users: Collection<User>;
+  "users/{userId}/settings": Collection<UserSettings>;
+  "users/{userId}/profile": Collection<UserProfile>;
+  workDays: Collection<WorkDay>;
+  syncQueue: Collection<SyncQueue>;
+  offlineMetadata: Collection<OfflineMetadata>;
+  payPeriods: Collection<PayPeriod>;
+  locations: Collection<Location>;
+  trucks: Collection<Truck>;
+  auditLog: Collection<AuditLog>;
 }
 ```
 
 ### Indexing Strategy
+
 ```typescript
 const requiredIndexes = {
   workDays: [
-    ['userId', 'date'],
-    ['userId', 'syncStatus'],
-    ['locationId', 'date'],
-    ['truckId', 'date']
+    ["userId", "date"],
+    ["userId", "syncStatus"],
+    ["locationId", "date"],
+    ["truckId", "date"],
   ],
   syncQueue: [
-    ['userId', 'status', 'timestamp'],
-    ['entityType', 'entityId']
-  ]
+    ["userId", "status", "timestamp"],
+    ["entityType", "entityId"],
+  ],
 };
 ```
 
 ## Related Resources
+
 - [[Firebase Data Modeling Guide]]
 - [[Offline First Data Strategy]]
 - [[Sync Implementation Details]]
 
 ## Notes
+
 1. All timestamps use Firebase server timestamp
 2. Compound IDs optimize offline sync
 3. Version tracking enables conflict resolution

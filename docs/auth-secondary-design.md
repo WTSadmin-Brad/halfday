@@ -1,7 +1,9 @@
 ## Login/Auth Pages - Soft Neumorphic Design
 
 ### The Overall Look
+
 Imagine a surface made of soft, white material (like high-end plastic or ceramic):
+
 - Everything appears carved or molded from one piece
 - Smooth, rounded corners everywhere
 - No harsh edges or strong contrasts
@@ -10,6 +12,7 @@ Imagine a surface made of soft, white material (like high-end plastic or ceramic
 ### Innovative Layout Ideas
 
 1. "Floating Island" Design:
+
    - Login form appears as a raised platform
    - Gentle shadows create depth
    - Form fields look pressed into the surface
@@ -17,6 +20,7 @@ Imagine a surface made of soft, white material (like high-end plastic or ceramic
    - Background has subtle, gradient texture
 
 2. "Layered Cards" Approach:
+
    - Multiple soft layers stack subtly
    - Main login card raises slightly higher
    - Secondary options (register/forgot) sit lower
@@ -33,6 +37,7 @@ Imagine a surface made of soft, white material (like high-end plastic or ceramic
 ### Interactive Elements
 
 1. Input Fields:
+
    - Look softly pressed into surface
    - Inner shadows create depth
    - Gentle highlight when focused
@@ -40,6 +45,7 @@ Imagine a surface made of soft, white material (like high-end plastic or ceramic
    - Error states use soft red shadows
 
 2. Action Buttons:
+
    - Rise above surface when untouched
    - Press down smoothly when clicked
    - Include subtle hover state
@@ -54,7 +60,9 @@ Imagine a surface made of soft, white material (like high-end plastic or ceramic
    - Loading states use soft pulsing effects
 
 ### Color and Shadow Philosophy
+
 Rather than using traditional colors for emphasis:
+
 - Use depth and shadow for hierarchy
 - Keep everything in soft, neutral tones
 - Add minimal accent colors
@@ -62,7 +70,9 @@ Rather than using traditional colors for emphasis:
 - Create interest through dimensionality
 
 ### Implementation Tips
+
 1. Light Source Consistency:
+
    - Maintain top-left light source
    - Keep shadow angles consistent
    - Use subtle, layered shadows
@@ -70,6 +80,7 @@ Rather than using traditional colors for emphasis:
    - Consider ambient light effects
 
 2. Animation Guidelines:
+
    - All movements should feel physical
    - Use spring animations for press
    - Keep transitions smooth but quick

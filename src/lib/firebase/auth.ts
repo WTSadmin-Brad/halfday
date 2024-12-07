@@ -6,11 +6,14 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   createUserWithEmailAndPassword,
-  sendPasswordResetEmail
+  getAuth,
+  sendPasswordResetEmail as firebaseSendPasswordResetEmail
 } from 'firebase/auth';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { auth, db } from './index';
+import { db } from './index';
 import { FirebaseTimestamp, BaseDocument } from './types';
+
+const auth = getAuth();
 
 // Types from data-models.md
 export enum UserRole {
@@ -85,17 +88,35 @@ export const signUpWithEmail = async (
   }
 };
 
-export const resetPassword = async (email: string) => {
+export const signOutUser = async () => {
   try {
-    await sendPasswordResetEmail(auth, email);
+    await signOut(auth);
   } catch (error) {
     throw new Error(getAuthErrorMessage(error));
   }
 };
 
-export const signOutUser = async () => {
+export const sendPasswordResetEmail = async (email: string) => {
   try {
-    await signOut(auth);
+    await firebaseSendPasswordResetEmail(auth, email);
+  } catch (error) {
+    if (error instanceof Error) {
+      switch (error.message) {
+        case 'auth/invalid-email':
+          throw new Error('Invalid email address');
+        case 'auth/user-not-found':
+          throw new Error('No account found with this email');
+        default:
+          throw new Error('Failed to send reset email. Please try again later.');
+      }
+    }
+    throw error;
+  }
+};
+
+export const resetPassword = async (email: string) => {
+  try {
+    await sendPasswordResetEmail(email);
   } catch (error) {
     throw new Error(getAuthErrorMessage(error));
   }

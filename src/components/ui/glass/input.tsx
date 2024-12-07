@@ -5,7 +5,7 @@ import { cn } from '@/lib/ui/utils'
 import { VariantProps, cva } from 'class-variance-authority'
 
 const glassInputVariants = cva(
-  'w-full text-crystal-white placeholder:text-periwinkle/50 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200',
+  'flex w-full text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-white/50 disabled:cursor-not-allowed disabled:opacity-50 font-outfit text-white/90',
   {
     variants: {
       variant: {
@@ -16,10 +16,11 @@ const glassInputVariants = cva(
         ],
         minimal: [
           'bg-transparent pb-2 px-3',
-          'border-b border-white/20',
-          'focus-visible:outline-none focus-visible:border-white/40',
-          'group-hover:border-white/30',
+          'border-b border-white/30',
+          'focus-visible:outline-none focus-visible:border-white/50',
+          'group-hover:border-white/40',
           'relative',
+          'rounded-none',
         ],
       },
       withGradient: {
@@ -77,7 +78,7 @@ export const GlassInput = React.forwardRef<HTMLInputElement, GlassInputProps>(
             className={cn(
               'absolute right-2 top-1/2 -translate-y-1/2',
               'text-white/40 group-hover:text-white/60 transition-colors',
-              variant === 'minimal' && 'top-1',
+              variant === 'minimal' && 'top-[52%]',
               iconClassName
             )}
           >

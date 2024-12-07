@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack: (config) => {
-    config.externals = [...config.externals, { canvas: "canvas" }];  // required for konva
+    config.externals = [...config.externals, { canvas: "canvas" }]; // required for konva
     return config;
   },
-  reactStrictMode: true
-}
+  reactStrictMode: true,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

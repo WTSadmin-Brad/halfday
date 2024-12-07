@@ -3,9 +3,9 @@ import {
   httpsCallable,
   HttpsCallable,
   HttpsCallableResult,
-  Functions
-} from 'firebase/functions';
-import { functions } from './index';
+  Functions,
+} from "firebase/functions";
+import { functions } from "./index";
 
 // Type definitions for cloud functions
 interface SyncFunctionPayload {
@@ -29,17 +29,17 @@ interface NotificationPayload {
 // Cloud Function wrappers
 export const syncUserData = httpsCallable<SyncFunctionPayload, void>(
   functions,
-  'syncUserData'
+  "syncUserData"
 );
 
 export const processPayroll = httpsCallable<ProcessPayrollPayload, string>(
   functions,
-  'processPayroll'
+  "processPayroll"
 );
 
 export const sendNotification = httpsCallable<NotificationPayload, void>(
   functions,
-  'sendNotification'
+  "sendNotification"
 );
 
 // Utility function to handle function calls with proper error handling
@@ -53,29 +53,35 @@ export async function callFunction<T, R>(
   } catch (error: any) {
     // Handle specific error codes
     const code = error.code as string;
-    const message = error.message || 'An unknown error occurred';
-    
+    const message = error.message || "An unknown error occurred";
+
     switch (code) {
-      case 'functions/cancelled':
-        throw new Error('The operation was cancelled.');
-      case 'functions/invalid-argument':
-        throw new Error('Invalid arguments provided to the function.');
-      case 'functions/deadline-exceeded':
-        throw new Error('The operation timed out.');
-      case 'functions/not-found':
-        throw new Error('The requested resource was not found.');
-      case 'functions/permission-denied':
-        throw new Error('Permission denied. Please check your authentication.');
-      case 'functions/resource-exhausted':
-        throw new Error('Resource quota exceeded or rate limit reached.');
-      case 'functions/failed-precondition':
-        throw new Error('The system is not in a state required for the operation.');
-      case 'functions/internal':
-        throw new Error('An internal error occurred. Please try again later.');
-      case 'functions/unavailable':
-        throw new Error('The service is currently unavailable. Please try again later.');
-      case 'functions/unauthenticated':
-        throw new Error('Authentication required. Please sign in and try again.');
+      case "functions/cancelled":
+        throw new Error("The operation was cancelled.");
+      case "functions/invalid-argument":
+        throw new Error("Invalid arguments provided to the function.");
+      case "functions/deadline-exceeded":
+        throw new Error("The operation timed out.");
+      case "functions/not-found":
+        throw new Error("The requested resource was not found.");
+      case "functions/permission-denied":
+        throw new Error("Permission denied. Please check your authentication.");
+      case "functions/resource-exhausted":
+        throw new Error("Resource quota exceeded or rate limit reached.");
+      case "functions/failed-precondition":
+        throw new Error(
+          "The system is not in a state required for the operation."
+        );
+      case "functions/internal":
+        throw new Error("An internal error occurred. Please try again later.");
+      case "functions/unavailable":
+        throw new Error(
+          "The service is currently unavailable. Please try again later."
+        );
+      case "functions/unauthenticated":
+        throw new Error(
+          "Authentication required. Please sign in and try again."
+        );
       default:
         throw new Error(message);
     }
@@ -83,7 +89,10 @@ export async function callFunction<T, R>(
 }
 
 // Example usage of the utility function:
-export async function triggerSync(userId: string, lastSyncTimestamp: number): Promise<void> {
+export async function triggerSync(
+  userId: string,
+  lastSyncTimestamp: number
+): Promise<void> {
   return callFunction(syncUserData, { userId, lastSyncTimestamp });
 }
 

@@ -1,9 +1,11 @@
 # Animation System Documentation
 
 ## Overview
+
 The animation system provides a flexible, performant, and accessible way to add animations throughout the application. Built on top of Framer Motion, it offers a suite of components, hooks, and utilities designed to make animations both powerful and easy to implement.
 
 ## Key Features
+
 - 🎭 **Composable Components** - Flexible animation components that work with any element
 - 🌊 **Advanced Stagger Patterns** - Multiple stagger patterns including wave, bounce, and exponential
 - ♿ **Accessibility First** - Respects reduced motion preferences
@@ -11,6 +13,7 @@ The animation system provides a flexible, performant, and accessible way to add 
 - 🎯 **Type Safety** - Full TypeScript support
 
 ## Table of Contents
+
 1. [Getting Started](./getting-started.md)
 2. [Components](./components/README.md)
 3. [Hooks](./hooks/README.md)

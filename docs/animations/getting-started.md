@@ -1,13 +1,15 @@
 # Getting Started with Animations
 
 ## Installation
+
 The animation system comes pre-installed with all necessary dependencies, primarily using Framer Motion as the animation engine.
 
 ## Basic Usage
 
 ### Simple Fade In Animation
+
 ```tsx
-import { AnimateIn } from '@/components/animations/AnimateIn';
+import { AnimateIn } from "@/components/animations/AnimateIn";
 
 function MyComponent() {
   return (
@@ -19,8 +21,9 @@ function MyComponent() {
 ```
 
 ### Staggered List Animation
+
 ```tsx
-import { AnimateStagger } from '@/components/animations/AnimateStagger';
+import { AnimateStagger } from "@/components/animations/AnimateStagger";
 
 function MyList() {
   return (
@@ -34,15 +37,16 @@ function MyList() {
 ```
 
 ## Animation Context
+
 The `AnimationContext` provides global control over animations:
 
 ```tsx
-import { AnimationProvider } from '@/lib/animations/context/AnimationContext';
+import { AnimationProvider } from "@/lib/animations/context/AnimationContext";
 
 function App() {
   return (
     <AnimationProvider
-      debug={process.env.NODE_ENV === 'development'}
+      debug={process.env.NODE_ENV === "development"}
       durationMultiplier={1}
     >
       {/* Your app content */}
@@ -52,10 +56,11 @@ function App() {
 ```
 
 ## Accessibility
+
 All animations automatically respect the user's reduced motion preferences. This can be checked using:
 
 ```tsx
-import { useReducedMotion } from '@/lib/animations/hooks/useReducedMotion';
+import { useReducedMotion } from "@/lib/animations/hooks/useReducedMotion";
 
 function MyComponent() {
   const prefersReducedMotion = useReducedMotion();

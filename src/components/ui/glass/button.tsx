@@ -6,7 +6,7 @@ import { VariantProps, cva } from 'class-variance-authority'
 import { Slot } from '@radix-ui/react-slot'
 
 const glassButtonVariants = cva(
-  'inline-flex items-center justify-center rounded-md text-sm font-medium relative transition-all duration-200 disabled:pointer-events-none disabled:opacity-50',
+  'relative inline-flex items-center justify-center rounded-lg text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 font-outfit',
   {
     variants: {
       variant: {
@@ -39,7 +39,15 @@ const glassButtonVariants = cva(
           'hover:before:scale-105',
           'before:transition-transform before:duration-300',
         ],
-        link: 'text-aurora-pink underline-offset-4 hover:underline',
+        link: [
+          'text-aurora-pink',
+          'transition-all duration-300',
+          'hover:scale-105',
+          'relative',
+          'after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px]',
+          'after:bg-aurora-pink after:transition-all after:duration-300',
+          'hover:after:w-full',
+        ],
       },
       size: {
         default: 'h-10 px-4 py-2',

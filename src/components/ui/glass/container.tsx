@@ -19,11 +19,15 @@ const glassContainerVariants = cva(
           'border-b-[0.5px] border-b-black/30',
         ],
         solid: [
-          'bg-white/10 border-white/20',
-          'before:absolute before:inset-0 before:bg-gradient-to-t before:from-white/20 before:to-transparent',
-          'after:absolute after:inset-0 after:bg-gradient-to-b after:from-[#020212]/50 after:to-transparent after:to-60%',
-          'border-t-[0.5px] border-t-white/40',
-          'border-b-[0.5px] border-b-black/40',
+          'relative overflow-hidden z-10',
+          'bg-white/[0.02] backdrop-blur-2xl',
+          'rounded-xl border border-white/[0.05]',
+          'shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]',
+          '[&>.shimmer-orb]:absolute [&>.shimmer-orb]:w-[500px] [&>.shimmer-orb]:h-[500px]',
+          '[&>.shimmer-orb]:opacity-[0.03]',
+          '[&>.shimmer-orb]:blur-2xl',
+          '[&>.shimmer-orb]:pointer-events-none',
+          'animate-container-fade-in',
         ],
         subtle: [
           'bg-white/5 border-white/15',
@@ -62,7 +66,7 @@ const glassContainerVariants = cva(
     defaultVariants: {
       variant: 'default',
       size: 'default',
-      hover: 'default',
+      hover: 'none',
     }
   }
 )
@@ -74,13 +78,24 @@ export interface GlassContainerProps
 }
 
 export const GlassContainer = React.forwardRef<HTMLDivElement, GlassContainerProps>(
-  ({ className, variant, size, hover, ...props }, ref) => {
+  ({ className, variant, size, hover, children, ...props }, ref) => {
     return (
       <div
         ref={ref}
         className={cn(glassContainerVariants({ variant, size, hover }), className)}
         {...props}
-      />
+      >
+        <div 
+          className="shimmer-orb bg-gradient-to-r from-aurora-pink via-aurora-pink/50 to-transparent animate-orb1"
+          aria-hidden="true"
+        />
+        <div 
+          className="shimmer-orb bg-gradient-to-r from-royal-blue via-royal-blue/50 to-transparent animate-orb2"
+          style={{ animationDelay: '-10s' }}
+          aria-hidden="true"
+        />
+        {children}
+      </div>
     )
   }
 )

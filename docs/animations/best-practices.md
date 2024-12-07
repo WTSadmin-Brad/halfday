@@ -3,12 +3,14 @@
 ## General Guidelines
 
 ### 1. Performance First
+
 - Keep animations simple and purposeful
 - Use `will-change` sparingly
 - Prefer opacity and transform properties
 - Avoid animating layout properties when possible
 
 ### 2. Accessibility
+
 ```tsx
 // ✅ Good: Respects user preferences
 const MyComponent = () => {
@@ -16,7 +18,7 @@ const MyComponent = () => {
   return (
     <AnimateIn
       overrides={{
-        duration: prefersReducedMotion ? 0 : 0.3
+        duration: prefersReducedMotion ? 0 : 0.3,
       }}
     >
       Content
@@ -26,22 +28,21 @@ const MyComponent = () => {
 
 // ❌ Bad: Forces animation regardless of preferences
 const MyComponent = () => (
-  <AnimateIn overrides={{ duration: 0.3 }}>
-    Content
-  </AnimateIn>
+  <AnimateIn overrides={{ duration: 0.3 }}>Content</AnimateIn>
 );
 ```
 
 ### 3. Debugging
+
 ```tsx
 // Development mode with debug info
 <AnimateStagger
-  debug={process.env.NODE_ENV === 'development'}
+  debug={process.env.NODE_ENV === "development"}
   overrides={{
     pattern: {
-      type: 'wave',
-      baseDelay: 0.1
-    }
+      type: "wave",
+      baseDelay: 0.1,
+    },
   }}
 >
   {items}
@@ -51,6 +52,7 @@ const MyComponent = () => (
 ## Common Patterns
 
 ### 1. List Animations
+
 ```tsx
 // ✅ Good: Efficient list animation
 <AnimateStagger>
@@ -72,14 +74,12 @@ const MyComponent = () => (
 ```
 
 ### 2. Modal/Dialog Animations
+
 ```tsx
 // ✅ Good: Smooth entry and exit
 <AnimatePresence>
   {isOpen && (
-    <AnimateIn
-      variants={fadeInUp}
-      exit={{ opacity: 0, y: 20 }}
-    >
+    <AnimateIn variants={fadeInUp} exit={{ opacity: 0, y: 20 }}>
       <Dialog>{content}</Dialog>
     </AnimateIn>
   )}
@@ -87,13 +87,11 @@ const MyComponent = () => (
 ```
 
 ### 3. Page Transitions
+
 ```tsx
 // ✅ Good: Simple, effective page transition
 const PageWrapper = ({ children }) => (
-  <AnimateIn
-    variants={fadeIn}
-    exit={{ opacity: 0 }}
-  >
+  <AnimateIn variants={fadeIn} exit={{ opacity: 0 }}>
     {children}
   </AnimateIn>
 );
@@ -102,11 +100,13 @@ const PageWrapper = ({ children }) => (
 ## Performance Tips
 
 1. **Batch Animations**
+
    - Group related animations
    - Use stagger patterns for multiple items
    - Consider lazy loading for long lists
 
 2. **Memory Management**
+
    - Clean up animation subscriptions
    - Remove listeners when components unmount
    - Use `useCallback` for animation handlers

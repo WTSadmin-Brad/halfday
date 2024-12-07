@@ -17,10 +17,12 @@ const neumorphicButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-anti-flash-white text-gunmetal shadow-neumorphic-flat hover:shadow-neumorphic-pressed active:shadow-neumorphic-pressed",
+        default:
+          "bg-anti-flash-white text-gunmetal shadow-neumorphic-flat hover:shadow-neumorphic-pressed active:shadow-neumorphic-pressed",
         pressed: "bg-anti-flash-white text-gunmetal shadow-neumorphic-pressed",
         ghost: "bg-transparent hover:bg-orange hover:text-white",
-        destructive: "bg-orange text-white hover:bg-orange/90 shadow-neumorphic-destructive",
+        destructive:
+          "bg-orange text-white hover:bg-orange/90 shadow-neumorphic-destructive",
       },
       size: {
         default: "h-12 px-6 py-3",
@@ -52,17 +54,23 @@ const neumorphicButtonVariants = cva(
  * </NeumorphicButton>
  * ```
  */
-const NeumorphicButton = React.forwardRef<HTMLButtonElement, NeumorphicButtonProps>(
-  ({ 
-    className, 
-    variant, 
-    size, 
-    asChild = false,
-    loading = false,
-    disabled,
-    children,
-    ...props 
-  }, ref) => {
+const NeumorphicButton = React.forwardRef<
+  HTMLButtonElement,
+  NeumorphicButtonProps
+>(
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      loading = false,
+      disabled,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp

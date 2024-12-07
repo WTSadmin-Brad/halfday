@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants, Target, VariantLabels } from "framer-motion";
 import { transitions, variants } from "@/lib/animations/constants";
@@ -29,7 +29,7 @@ export const AnimateStagger = ({
   animate = true,
   transition,
   onAnimationStart,
-  onAnimationComplete
+  onAnimationComplete,
 }: AnimateStaggerProps) => {
   return (
     <AnimatePresence mode="wait">
@@ -44,9 +44,7 @@ export const AnimateStagger = ({
         onAnimationComplete={onAnimationComplete}
       >
         {React.Children.map(children, (child) => (
-          <motion.div variants={variants.staggerItem}>
-            {child}
-          </motion.div>
+          <motion.div variants={variants.staggerItem}>{child}</motion.div>
         ))}
       </motion.div>
     </AnimatePresence>

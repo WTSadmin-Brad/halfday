@@ -23,7 +23,7 @@ Key visual elements:
 Picture soft, pillowy buttons that look like they're gently pressed out of or into the surface:
 
 1. Unpressed State:
-   
+
    - Looks like it's rising from the surface
    - Has a light shadow on top and left
    - Has a darker shadow on bottom and right
@@ -31,7 +31,7 @@ Picture soft, pillowy buttons that look like they're gently pressed out of or in
    - When you hover, it rises slightly more
 
 2. Pressed State:
-   
+
    - Looks like it's sinking into the surface
    - Shadows reverse: darker inside, lighter outside
    - Gives a satisfying "push" feeling

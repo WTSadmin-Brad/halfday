@@ -10,6 +10,9 @@ export const metadata: Metadata = {
 export default function LoginPage() {
   return (
     <AuroraBackground>
+      {/* Light Orb */}
+      <div className="light-orb animate-light-beam" aria-hidden="true" />
+      
       <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <LoginForm />
       </div>
