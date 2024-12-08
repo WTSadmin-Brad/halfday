@@ -1,7 +1,7 @@
 import { cn } from "@/lib/ui/utils";
 import { useState, useRef, useEffect } from "react";
 import { MapPin } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useSpring } from "framer-motion";
 
 type Status = "full" | "half" | "off" | "none";
 type Phase = "status" | "transitioning" | "location";
@@ -13,6 +13,11 @@ const LOCATIONS = [
   { id: "site-a", name: "Site A" },
   { id: "home", name: "Home" },
 ] as const;
+
+// Match drawer constants
+const MAX_HEIGHT_VH = 55;
+const MIN_BOTTOM_SPACING = 60;
+const FAB_OVERLAP_VH = 2.5; // This will be about 20px on a 1080p screen and scale proportionally
 
 interface StatusFABProps {
   onStatusChange?: (status: Status) => void;
@@ -32,6 +37,61 @@ export function StatusFAB({
   const [phase, setPhase] = useState<Phase>("status");
   const [showRadial, setShowRadial] = useState(false);
   const locationTimerRef = useRef<NodeJS.Timeout>();
+  const [maxHeight, setMaxHeight] = useState(0);
+
+  // Update maxHeight when window resizes
+  useEffect(() => {
+    const updateMaxHeight = () => {
+      setMaxHeight(window.innerHeight * (MAX_HEIGHT_VH / 100));
+    };
+    
+    updateMaxHeight();
+    window.addEventListener('resize', updateMaxHeight);
+    return () => window.removeEventListener('resize', updateMaxHeight);
+  }, []);
+
+  // Calculate positions based on phase
+  const getPosition = () => {
+    const overlapPx = window.innerHeight * (FAB_OVERLAP_VH / 100);
+    
+    if (phase === "status") {
+      return {
+        position: 'fixed',
+        bottom: isDrawerExpanded ? `${MIN_BOTTOM_SPACING}px` : `${MIN_BOTTOM_SPACING}px`,
+        left: '50%',
+        x: '-50%',
+        y: isDrawerExpanded ? `-${maxHeight - MIN_BOTTOM_SPACING - overlapPx}px` : '0px',
+        top: 'auto'
+      };
+    }
+    
+    if (phase === "location") {
+      return {
+        position: 'fixed',
+        top: '50%',
+        left: '40px',
+        x: '0%',
+        y: '-50%',
+        bottom: 'auto'
+      };
+    }
+
+    return phase === "status" ? {
+      position: 'fixed',
+      bottom: isDrawerExpanded ? `${MIN_BOTTOM_SPACING}px` : `${MIN_BOTTOM_SPACING}px`,
+      left: '50%',
+      x: '-50%',
+      y: isDrawerExpanded ? `-${maxHeight - MIN_BOTTOM_SPACING - overlapPx}px` : '0px',
+      top: 'auto'
+    } : {
+      position: 'fixed',
+      top: '50%',
+      left: '40px',
+      x: '0%',
+      y: '-50%',
+      bottom: 'auto'
+    };
+  };
 
   // Clear timer on unmount
   useEffect(() => {
@@ -41,44 +101,6 @@ export function StatusFAB({
       }
     };
   }, []);
-
-  // Calculate positions based on phase
-  const getPosition = () => {
-    if (phase === "status") {
-      return {
-        bottom: isDrawerExpanded ? 'calc(55vh + 60px)' : '60px',
-        left: '50%',
-        x: '-50%',
-        y: '0%',
-        top: 'auto'
-      };
-    }
-    
-    if (phase === "location") {
-      return {
-        top: '50%',
-        left: '40px',
-        x: '0%',
-        y: '-50%',
-        bottom: 'auto'
-      };
-    }
-
-    // For transitioning phase, use the current position
-    return phase === "status" ? {
-      bottom: isDrawerExpanded ? 'calc(55vh + 60px)' : '60px',
-      left: '50%',
-      x: '-50%',
-      y: '0%',
-      top: 'auto'
-    } : {
-      top: '50%',
-      left: '40px',
-      x: '0%',
-      y: '-50%',
-      bottom: 'auto'
-    };
-  };
 
   // Handle status changes
   const handleClick = () => {
