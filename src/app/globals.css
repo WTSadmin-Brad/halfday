@@ -135,12 +135,79 @@
     }
   }
 
+  @keyframes shrink-to-point {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.1);
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes expand-from-point {
+    0% {
+      transform: scale(0.1);
+      opacity: 0.9;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes energy-pulse {
+    0% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes outer-glow {
+    0% {
+      opacity: 0.2;
+      transform: scale(0.95);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 0.2;
+      transform: scale(0.95);
+    }
+  }
+
+  @keyframes status-pulse {
+    0% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+  }
+
   .animate-orb1 {
-    animation: moveOrb1 15s infinite linear; /* Reduced from 20s */
+    animation: moveOrb1 20s infinite linear;
   }
 
   .animate-orb2 {
-    animation: moveOrb2 18s infinite linear; /* Reduced from 25s */
+    animation: moveOrb2 25s infinite linear;
   }
 
   .animate-container-fade-in {
@@ -174,5 +241,17 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .animation-delay-150 {
+    animation-delay: 150ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-500 {
+    animation-delay: 500ms;
   }
 }

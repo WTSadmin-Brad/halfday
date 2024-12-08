@@ -3,6 +3,7 @@
 import { CalendarGrid } from "@/components/worker/calendar/calendar-grid";
 import { CalendarHeader } from "@/components/worker/calendar/calendar-header";
 import { CalendarDrawer } from "@/components/worker/calendar/calendar-drawer";
+import { StatusFAB } from "@/components/worker/calendar/status-fab";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { cn } from "@/lib/ui/utils";
 import { useState } from "react";
@@ -36,25 +37,32 @@ export default function CalendarPage() {
         onProfileClick={handleProfileClick}
       />
       <main className="min-h-screen pt-24 px-4 pb-4 overflow-x-hidden">
-        {/* Calendar Section */}
-        <div className="max-w-4xl mx-auto">
-          <div className={cn(
-            "w-full rounded-lg overflow-hidden",
-            "bg-white/18",
-            "border border-white/15",
-            "shadow-lg shadow-black/5",
-            "relative",
-            "backdrop-blur-[3px]",
-            "ring-1 ring-white/25",
-            "before:absolute before:inset-0 before:bg-gradient-to-t before:from-white/[0.02] before:to-[#020212]/[0.02]"
-          )}>
-            <CalendarGrid 
-              onDaySelect={handleDaySelect}
-              dayStatuses={sampleStatuses}
-              isDrawerExpanded={isDrawerExpanded}
-            />
-          </div>
+        {/* Calendar Grid */}
+        <div className={cn(
+          "max-w-4xl mx-auto",
+          "rounded-lg overflow-hidden",
+          "bg-white/18",
+          "border border-white/15",
+          "shadow-lg shadow-black/5",
+          "relative",
+          "backdrop-blur-[3px]",
+          "ring-1 ring-white/25",
+          "before:absolute before:inset-0 before:bg-gradient-to-t before:from-white/[0.02] before:to-[#020212]/[0.02]"
+        )}>
+          <CalendarGrid 
+            onDaySelect={handleDaySelect}
+            dayStatuses={sampleStatuses}
+            isDrawerExpanded={isDrawerExpanded}
+          />
         </div>
+
+        {/* Status FAB */}
+        <StatusFAB 
+          isDrawerExpanded={isDrawerExpanded} 
+          className={cn(
+            "z-[100]"
+          )}
+        />
 
         {/* Calendar Drawer */}
         <CalendarDrawer onExpandedChange={setIsDrawerExpanded}>

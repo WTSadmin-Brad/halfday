@@ -44,6 +44,26 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      animation: {
+        "energy-pulse": "energy-pulse 2s ease-in-out infinite",
+        "status-pulse": "status-pulse 2s ease-in-out infinite",
+        "shrink-to-point": "shrink-to-point 0.3s ease-in-out forwards",
+        "expand-from-point": "expand-from-point 0.3s ease-in-out forwards",
+        shrink: "shrink 0.3s ease-in-out forwards",
+        expand: "expand 0.3s ease-in-out forwards",
+        float: "float 3s ease-in-out infinite",
+        "pulse-subtle": "pulse-subtle 2s ease-in-out infinite",
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-5px)' },
+        },
+        'pulse-subtle': {
+          '0%, 100%': { transform: 'scale(1)', opacity: '1' },
+          '50%': { transform: 'scale(1.05)', opacity: '0.9' },
+        },
+      },
       colors: {
         border: "hsl(var(--color-border))",
         input: "hsl(var(--input))",
