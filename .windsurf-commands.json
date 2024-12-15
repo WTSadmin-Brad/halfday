@@ -1,0 +1,20 @@
+{
+  "commands": {
+    "createComponent": {
+      "description": "Create a new component with proper design system",
+      "args": {
+        "name": "string",
+        "design": ["glassmorphic", "neumorphic"]
+      },
+      "template": "./templates/component.tsx"
+    },
+    "createPage": {
+      "description": "Create a new page with proper design system",
+      "args": {
+        "path": "string",
+        "design": ["glassmorphic", "neumorphic"]
+      },
+      "template": "./templates/page.tsx"
+    }
+  }
+}

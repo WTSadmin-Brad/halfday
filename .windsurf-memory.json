@@ -1,42 +1,106 @@
 {
   // .windsurf-memory.json
   // Persistent project memory configuration for maintaining context between sessions
-  
+
   "projectType": "next-js-pwa",
-  
+
   // Technical stack specifications
   "techStack": {
     "frontend": {
       "framework": "next@14.0.3",
       "styling": "tailwind@3.3.5",
-      "components": "shadcn-ui@latest"
+      "components": "shadcn-ui@latest",
+      "designSystem": {
+        "type": "mixed",
+        "implementations": {
+          "glassmorphic": ["auth", "calendar"],
+          "neumorphic": ["profile/settings", "admin"]
+        },
+        "styles": {
+          "glassmorphic": {
+            "base": "bg-white/[0.03] backdrop-blur-md border-white/[0.05]",
+            "card": "rounded-lg shadow-lg shadow-black/5"
+          },
+          "neumorphic": {
+            "base": "bg-[#E0E5EC] shadow-[8px_8px_16px_#a3b1c6,-8px_-8px_16px_#ffffff]",
+            "card": "rounded-xl"
+          }
+        }
+      }
     },
     "backend": {
-      "service": "firebase@10.6.0"
+      "service": "firebase@10.6.0",
+      "features": {
+        "auth": true,
+        "firestore": true,
+        "functions": true,
+        "storage": true
+      }
     }
   },
-  
+
   // Project constraints and requirements
   "constraints": {
     "nodeVersion": "18.17.0",
     "typescript": true,
-    "offline": true
+    "offline": true,
+    "strictMode": true
   },
-  
+
+  // Architecture configurations
+  "architecture": {
+    "componentStructure": "feature-based",
+    "stateManagement": {
+      "local": "react-hooks",
+      "global": "zustand",
+      "persistence": "firebase"
+    },
+    "routing": {
+      "type": "app-router",
+      "groups": ["(auth)", "(worker)", "(admin)"]
+    }
+  },
+
   // Feature configurations
   "features": {
     "pwa": {
       "enabled": true,
       "offline": true,
       "manifestPath": "./public/manifest.json",
-      "workboxConfig": "./next.config.js"
+      "workboxConfig": "./next.config.js",
+      "syncStrategy": "background"
     },
     "firebase": {
       "configPath": "./src/lib/firebase/config.ts",
-      "enforceTypes": true
+      "enforceTypes": true,
+      "collections": [
+        "users",
+        "workDays",
+        "locations",
+        "trucks",
+        "payPeriods",
+        "auditLog"
+      ]
+    },
+    "authentication": {
+      "provider": "firebase",
+      "roles": ["worker", "admin"],
+      "persistence": "local"
+    },
+    "design": {
+      "typography": {
+        "system": "custom",
+        "configPath": "./src/lib/typography"
+      },
+      "components": {
+        "base": "@/components/ui",
+        "auth": "@/components/auth",
+        "worker": "@/components/worker",
+        "admin": "@/components/admin"
+      }
     }
   },
-  
+
   // Development requirements
   "development": {
     "requiredExtensions": [
@@ -44,9 +108,21 @@
       "dbaeumer.vscode-eslint",
       "bradlc.vscode-tailwindcss"
     ],
-    "recommendedExtensions": [
-      "github.copilot",
-      "eamodio.gitlens"
-    ]
+    "recommendedExtensions": ["github.copilot", "eamodio.gitlens"],
+    "conventions": {
+      "commits": "conventional-commits",
+      "branchNaming": "feature/fix/chore/docs",
+      "codeStyle": "prettier"
+    },
+    "testing": {
+      "unit": "jest",
+      "e2e": "playwright",
+      "coverage": {
+        "statements": 80,
+        "branches": 70,
+        "functions": 80,
+        "lines": 80
+      }
+    }
   }
 }

@@ -1,0 +1,24 @@
+{
+  "editor": {
+    "formatOnSave": true,
+    "defaultFormatter": "prettier",
+    "tabSize": 2,
+    "rulers": [100]
+  },
+  "folders": {
+    "exclude": ["**/node_modules", "**/.next", "**/build", "**/dist"]
+  },
+  "files": {
+    "associations": {
+      "*.style.ts": "typescript",
+      "*.test.tsx": "typescriptreact"
+    }
+  },
+  "search": {
+    "exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/build": true
+    }
+  }
+}

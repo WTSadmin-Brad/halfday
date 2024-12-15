@@ -1,0 +1,20 @@
+{
+  "components": {
+    "glassmorphicContainer": {
+      "prefix": "glass-container",
+      "body": [
+        "<div className=\"bg-white/[0.03] backdrop-blur-md border-white/[0.05] rounded-lg shadow-lg shadow-black/5\">",
+        "  $1",
+        "</div>"
+      ]
+    },
+    "neumorphicContainer": {
+      "prefix": "neumorph-container",
+      "body": [
+        "<div className=\"bg-[#E0E5EC] shadow-[8px_8px_16px_#a3b1c6,-8px_-8px_16px_#ffffff] rounded-xl\">",
+        "  $1",
+        "</div>"
+      ]
+    }
+  }
+}

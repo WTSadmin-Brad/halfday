@@ -10,7 +10,7 @@
     --color-primary: 357 82% 88%; /* Aurora Pink: #F9C8CA */
     --color-secondary: 153 14% 45%; /* Sage Green: #638475 */
     --color-muted: 225 13% 87%; /* Light Gray: #D8DBE2 */
-    
+
     /* Semantic Color Mappings */
     --color-card: var(--color-background);
     --color-card-foreground: var(--color-foreground);
@@ -20,19 +20,10 @@
     --color-accent-foreground: var(--color-background);
     --color-destructive: var(--color-primary);
     --color-destructive-foreground: var(--color-background);
-    --color-muted-foreground: var(--color-muted);
+    --color-muted-foreground: var(--color-foreground);
+    --color-popover: var(--color-background);
+    --color-popover-foreground: var(--color-foreground);
     --color-border: var(--color-muted);
-    --color-input: var(--color-muted);
-    --color-ring: var(--color-primary);
-    
-    /* Chart Colors - Keeping existing ones for now */
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    
-    --radius: 0.5rem;
   }
 
   /* We'll implement dark mode later */
@@ -43,9 +34,10 @@
   }
 
   * {
-    @apply border-glass;
+    @apply border-border;
   }
 
+  /* Animation Keyframes */
   @keyframes shimmer {
     0% {
       background-position: 200% 0;
@@ -232,12 +224,24 @@
   }
 
   /* Form elements appear after container, before logo */
-  .delay-0 { animation-delay: 1.2s; }  /* Logo */
-  .delay-1 { animation-delay: 1.6s; }  /* Email */
-  .delay-2 { animation-delay: 1.8s; }  /* Password */
-  .delay-3 { animation-delay: 2.0s; }  /* Button */
-  .delay-4 { animation-delay: 2.2s; }  /* Links */
-  .delay-5 { animation-delay: 2.4s; }  /* Extra delay for final elements */
+  .delay-0 {
+    animation-delay: 1.2s;
+  } /* Logo */
+  .delay-1 {
+    animation-delay: 1.6s;
+  } /* Email */
+  .delay-2 {
+    animation-delay: 1.8s;
+  } /* Password */
+  .delay-3 {
+    animation-delay: 2s;
+  } /* Button */
+  .delay-4 {
+    animation-delay: 2.2s;
+  } /* Links */
+  .delay-5 {
+    animation-delay: 2.4s;
+  } /* Extra delay for final elements */
 
   body {
     @apply bg-background text-foreground;

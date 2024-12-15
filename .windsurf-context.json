@@ -1,0 +1,28 @@
+{
+  "projectContext": {
+    "currentPhase": "profile-implementation",
+    "designPatterns": {
+      "auth": "glassmorphic",
+      "calendar": "glassmorphic",
+      "profile": "neumorphic",
+      "admin": "neumorphic"
+    },
+    "componentPatterns": {
+      "page": {
+        "imports": [
+          "import { Metadata } from 'next'",
+          "import { cn } from '@/lib/ui/utils'"
+        ],
+        "metadata": {
+          "required": true,
+          "pattern": "title: string, description: string"
+        }
+      },
+      "profile": {
+        "sections": ["info", "settings"],
+        "layout": "single-page",
+        "design": "neumorphic"
+      }
+    }
+  }
+}

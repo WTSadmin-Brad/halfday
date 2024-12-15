@@ -1,0 +1,117 @@
+{
+  "project": {
+    "name": "Half Day App",
+    "type": "next-js-pwa",
+    "description": "Worker schedule tracking PWA with offline support"
+  },
+  "codeStyle": {
+    "typescript": {
+      "strict": true,
+      "noImplicitAny": true,
+      "exactOptionalPropertyTypes": true
+    },
+    "react": {
+      "strictMode": true,
+      "preferFunctionComponents": true,
+      "hooksFirst": true
+    },
+    "formatting": {
+      "useTabs": false,
+      "tabWidth": 2,
+      "printWidth": 80,
+      "semi": true,
+      "singleQuote": true,
+      "trailingComma": "es5"
+    }
+  },
+  "componentRules": {
+    "structure": "feature-based",
+    "naming": {
+      "components": "PascalCase",
+      "files": "kebab-case",
+      "folders": "kebab-case"
+    },
+    "organization": {
+      "baseComponents": "/components/ui",
+      "featureComponents": "/components/[feature]",
+      "layouts": "/components/layouts",
+      "pages": "/app"
+    }
+  },
+  "styleRules": {
+    "tailwind": {
+      "useCustomVariants": true,
+      "prefixImportant": true,
+      "useArbitraryValues": false
+    },
+    "designSystem": {
+      "calendar": "glassmorphism",
+      "profile": "neumorphic",
+      "admin": "neumorphic",
+      "auth": "glassmorphism"
+    }
+  },
+  "documentationRules": {
+    "components": {
+      "requirePropTypes": true,
+      "requireDescription": true,
+      "requireExamples": true,
+      "template": "# [ComponentName]\n\n## Props\n\n## Description\n\n## Examples\n\n## Notes"
+    },
+    "pages": {
+      "requireMetadata": true,
+      "requireFlowDiagram": true,
+      "template": "# [PageName]\n\n## Route\n\n## Features\n\n## Flow\n\n## Components Used\n\n## Notes"
+    },
+    "hooks": {
+      "requireParams": true,
+      "requireReturns": true,
+      "requireExample": true,
+      "template": "# [HookName]\n\n## Parameters\n\n## Returns\n\n## Example\n\n## Notes"
+    }
+  },
+  "testingRules": {
+    "requireTests": true,
+    "coverageThreshold": {
+      "statements": 80,
+      "branches": 70,
+      "functions": 80,
+      "lines": 80
+    },
+    "testPattern": "**/*.test.ts",
+    "testLocation": "__tests__"
+  },
+  "modificationRules": {
+    "preserveExistingCode": true,
+    "requireChangeDocumentation": true,
+    "showFullContext": true,
+    "markModifiedSections": true
+  },
+  "memory": {
+    "enableSessionMemory": true,
+    "persistAcrossSessions": true,
+    "entityTypes": [
+      "Project",
+      "Component",
+      "Feature",
+      "Document",
+      "Decision",
+      "Bug",
+      "User"
+    ],
+    "relationTypes": [
+      "implements",
+      "depends_on",
+      "related_to",
+      "part_of",
+      "creates",
+      "modifies",
+      "fixes"
+    ],
+    "observationRules": {
+      "maxLength": 500,
+      "requireTimestamp": true,
+      "requireContext": true
+    }
+  }
+}
